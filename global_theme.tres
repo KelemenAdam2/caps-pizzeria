@@ -1,0 +1,44 @@
+[gd_resource type="Theme" format=3 uid="uid://d0l0s56hclvhv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l7yju"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ofusn"]
+bg_color = Color(1, 1, 1, 0.53333336)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ig7tw"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0.37036458, 0.37036446, 0.37036443, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[resource]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 25
+Label/styles/normal = SubResource("StyleBoxFlat_l7yju")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_ofusn")
+RichTextLabel/font_sizes/normal_font_size = 25
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_ig7tw")

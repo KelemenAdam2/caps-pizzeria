@@ -1,0 +1,661 @@
+[gd_scene format=3 uid="uid://hyumr18ydnr"]
+
+[ext_resource type="Theme" uid="uid://d0l0s56hclvhv" path="res://global_theme.tres" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://bah5313mkqth2" path="res://main.gd" id="1_ig7tw"]
+
+[node name="Main" type="Control" unique_id=1155888874]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0xm2m")
+script = ExtResource("1_ig7tw")
+
+[node name="Counter" type="Control" parent="." unique_id=851193503]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="Counter" unique_id=1731176463]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.6378959, 0.63789576, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Counter" unique_id=1089444245]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer" unique_id=398921276]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Counter/MarginContainer/VBoxContainer" unique_id=1393304638]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.53
+
+[node name="MarginContainer" type="MarginContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer" unique_id=1634537008]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="OrderCont" type="HBoxContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer" unique_id=265452371]
+layout_mode = 2
+
+[node name="OrderSlot1" type="PanelContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont" unique_id=1872915355]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1" unique_id=2011397771]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1/MarginContainer" unique_id=163863297]
+layout_mode = 2
+
+[node name="TitleLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1/MarginContainer/VBoxContainer" unique_id=120131649]
+layout_mode = 2
+text = "Order #101"
+horizontal_alignment = 1
+
+[node name="ToppingLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1/MarginContainer/VBoxContainer" unique_id=1647453882]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Toppings:
+ + Sauce
+ + Cheese
+ + Pepperoni"
+
+[node name="TakeOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1/MarginContainer/VBoxContainer" unique_id=204148903]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "take order"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GiveOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1/MarginContainer/VBoxContainer" unique_id=493313346]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "give order"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OrderSlot2" type="PanelContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont" unique_id=1719965371]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2" unique_id=455929547]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2/MarginContainer" unique_id=1490458772]
+layout_mode = 2
+
+[node name="TitleLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2/MarginContainer/VBoxContainer" unique_id=953309686]
+layout_mode = 2
+text = "Order #101"
+horizontal_alignment = 1
+
+[node name="ToppingLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2/MarginContainer/VBoxContainer" unique_id=302136918]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Toppings:
+ + Sauce
+ + Cheese
+ + Pepperoni"
+
+[node name="TakeOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2/MarginContainer/VBoxContainer" unique_id=931874388]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "take order"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GiveOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2/MarginContainer/VBoxContainer" unique_id=315847980]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "give order"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OrderSlot3" type="PanelContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont" unique_id=596196836]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3" unique_id=2038124801]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3/MarginContainer" unique_id=264641439]
+layout_mode = 2
+
+[node name="TitleLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3/MarginContainer/VBoxContainer" unique_id=500965265]
+layout_mode = 2
+text = "Order #101"
+horizontal_alignment = 1
+
+[node name="ToppingLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3/MarginContainer/VBoxContainer" unique_id=1135482535]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Toppings:
+ + Sauce
+ + Cheese
+ + Pepperoni"
+
+[node name="TakeOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3/MarginContainer/VBoxContainer" unique_id=404407528]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "take order"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GiveOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3/MarginContainer/VBoxContainer" unique_id=1552863737]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "give order"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OrderSlot4" type="PanelContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont" unique_id=1421500209]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4" unique_id=1117388184]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4/MarginContainer" unique_id=1070473424]
+layout_mode = 2
+
+[node name="TitleLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4/MarginContainer/VBoxContainer" unique_id=850105110]
+layout_mode = 2
+text = "Order #101"
+horizontal_alignment = 1
+
+[node name="ToppingLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4/MarginContainer/VBoxContainer" unique_id=1895606580]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Toppings:
+ + Sauce
+ + Cheese
+ + Pepperoni"
+
+[node name="TakeOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4/MarginContainer/VBoxContainer" unique_id=474460711]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "take order"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GiveOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4/MarginContainer/VBoxContainer" unique_id=545595418]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "give order"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CounterCont" type="HBoxContainer" parent="Counter/MarginContainer/VBoxContainer" unique_id=122398822]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SlicePanel" type="PanelContainer" parent="Counter/MarginContainer/VBoxContainer/CounterCont" unique_id=38964991]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Counter/MarginContainer/VBoxContainer/CounterCont/SlicePanel" unique_id=633011006]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer/VBoxContainer/CounterCont/SlicePanel/MarginContainer" unique_id=182600035]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Counter/MarginContainer/VBoxContainer/CounterCont/SlicePanel/MarginContainer/VBoxContainer" unique_id=181878199]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Slice" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/CounterCont/SlicePanel/MarginContainer/VBoxContainer" unique_id=1070014943]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "slice
+"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoxPanel" type="PanelContainer" parent="Counter/MarginContainer/VBoxContainer/CounterCont" unique_id=242600797]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Counter/MarginContainer/VBoxContainer/CounterCont/BoxPanel" unique_id=1626999366]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer/VBoxContainer/CounterCont/BoxPanel/MarginContainer" unique_id=566731191]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Counter/MarginContainer/VBoxContainer/CounterCont/BoxPanel/MarginContainer/VBoxContainer" unique_id=165628256]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PackUp" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/CounterCont/BoxPanel/MarginContainer/VBoxContainer" unique_id=1217196008]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "pack up"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer/VBoxContainer/CounterCont" unique_id=320685528]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="Counter/MarginContainer/VBoxContainer/CounterCont/VBoxContainer" unique_id=1935810994]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Trash" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/CounterCont/VBoxContainer" unique_id=842713409]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "trash"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Kitchen" type="Control" parent="." unique_id=1939085942]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="Kitchen" unique_id=405668901]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.63144255, 0.5751866, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Kitchen" unique_id=53833935]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Kitchen/MarginContainer" unique_id=1965790674]
+layout_mode = 2
+
+[node name="MainPanel" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer" unique_id=852822770]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.58
+
+[node name="MarginContainer" type="MarginContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel" unique_id=1563494948]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer" unique_id=1635520998]
+layout_mode = 2
+
+[node name="IngPanel" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer" unique_id=1771336553]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel" unique_id=955798426]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer" unique_id=40800096]
+layout_mode = 2
+
+[node name="Sauce" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer" unique_id=370448702]
+layout_mode = 2
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "SAUCE"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cheese" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer" unique_id=1565214082]
+layout_mode = 2
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "CHEESE"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pepperoni" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer" unique_id=889186135]
+layout_mode = 2
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "PEPPERONI"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer" unique_id=60007599]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MakeDough" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer" unique_id=1929571136]
+layout_mode = 2
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "MAKE DOUGH"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PizzaPanel" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer" unique_id=805793271]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel" unique_id=1161271038]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer" unique_id=535086563]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer" unique_id=1999299707]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Add" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer" unique_id=688408776]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "ADD"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer" unique_id=662177299]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 18.79
+
+[node name="IntoOven" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer" unique_id=1606123515]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "INTO OVEN"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer" unique_id=850806438]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Trash" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer" unique_id=987134880]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "TRASH"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OvenPanel" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer" unique_id=548618329]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel" unique_id=1250931458]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer" unique_id=1870786933]
+layout_mode = 2
+
+[node name="TakeOut" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer" unique_id=1717259948]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "TAKE OUT"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OvenPanel1" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer" unique_id=45919395]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel1" unique_id=1232584598]
+layout_mode = 2
+
+[node name="1" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel1/TextureRect" unique_id=380383865]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -22.5
+offset_right = 34.0
+offset_bottom = 22.5
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "1"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel1" unique_id=580662055]
+custom_minimum_size = Vector2(279.17, 25.61)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+rounded = true
+show_percentage = false
+
+[node name="OvenPanel2" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer" unique_id=1548406641]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel2" unique_id=1189429640]
+layout_mode = 2
+
+[node name="2" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel2/TextureRect" unique_id=816298667]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -22.5
+offset_right = 34.0
+offset_bottom = 22.5
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "2"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel2" unique_id=59270165]
+custom_minimum_size = Vector2(279.17, 25.61)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+rounded = true
+show_percentage = false
+
+[node name="OvenPanel3" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer" unique_id=256095336]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel3" unique_id=1512423301]
+layout_mode = 2
+
+[node name="3" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel3/TextureRect" unique_id=1941744080]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -22.5
+offset_right = 34.0
+offset_bottom = 22.5
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "3"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel3" unique_id=810645143]
+custom_minimum_size = Vector2(279.17, 25.61)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+rounded = true
+show_percentage = false
+
+[node name="OvenPanel4" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer" unique_id=1578714203]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel4" unique_id=991811348]
+layout_mode = 2
+
+[node name="4" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel4/TextureRect" unique_id=251801333]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -22.5
+offset_right = 34.0
+offset_bottom = 22.5
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "4"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel4" unique_id=512753965]
+custom_minimum_size = Vector2(279.17, 25.61)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+rounded = true
+show_percentage = false
