@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://66au7qmsjf4n"
-path="res://.godot/imported/pizza_cooked.png-2f03ecdb45285eec4d0fd746425699ff.ctex"
+uid="uid://cdbb21gs0u61l"
+path="res://.godot/imported/pizza_uncooked.png-308c32e7887762eaeaa9631af83c8326.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/pizza_cooked.png"
-dest_files=["res://.godot/imported/pizza_cooked.png-2f03ecdb45285eec4d0fd746425699ff.ctex"]
+source_file="res://textures/pizza_uncooked.png"
+dest_files=["res://.godot/imported/pizza_uncooked.png-308c32e7887762eaeaa9631af83c8326.ctex"]
 
 [params]
 

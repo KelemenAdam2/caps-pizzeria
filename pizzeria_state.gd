@@ -51,9 +51,7 @@ func update(delta: float) -> void:
 				order_slot_changed.emit(i + 1, order)
 
 
-# ==========================================
 # KITCHEN ACTIONS (Uppercase / Shift held)
-# ==========================================
 
 ## "MAKE DOUGH"
 ## Creates a new Pizza instance on the kitchen table (table must be empty).
@@ -131,9 +129,7 @@ func take_out_of_oven(oven_number: int) -> bool:
 	return true
 
 
-# ==========================================
 # COUNTER ACTIONS (Lowercase / No Shift)
-# ==========================================
 
 ## Takes order by order number or slot number
 func take_order_by_number(target_num: int) -> bool:
@@ -254,10 +250,7 @@ func spawn_order(slot_number: int, toppings: Array[String], p_order_patience: fl
 	return new_order
 
 
-# ==========================================
 # COMMAND GENERATION & EXECUTION
-# ==========================================
-
 ## Returns all currently executable kitchen commands based on restaurant state.
 func get_valid_kitchen_commands() -> Array[String]:
 	var commands: Array[String] = []

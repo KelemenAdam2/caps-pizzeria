@@ -3,12 +3,9 @@ extends Control
 @onready var counter: Control = $Counter
 @onready var kitchen: Control = $Kitchen
 
-## Pizzeria state engine
 var pizzeria: PizzeriaState = PizzeriaState.new()
 
-## -------------------------------------------------------------
-## TEXTURE ASSETS
-## -------------------------------------------------------------
+# TEXTURE ASSETS
 var tex_uncooked: Texture2D = null
 var tex_cooked: Texture2D = null
 var tex_sauce: Texture2D = null
@@ -16,9 +13,7 @@ var tex_cheese_unmelted: Texture2D = null
 var tex_cheese_melted: Texture2D = null
 var tex_pepperoni: Texture2D = null
 
-## -------------------------------------------------------------
-## COUNTER NODE REFERENCES
-## -------------------------------------------------------------
+# COUNTER NODE REFERENCES
 @onready var order_slot_nodes = [
 	{
 		"container": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1,
@@ -58,9 +53,7 @@ var tex_pepperoni: Texture2D = null
 
 @onready var counter_trash_label: RichTextLabel = $Counter/MarginContainer/VBoxContainer/CounterCont/VBoxContainer/Trash
 
-## -------------------------------------------------------------
-## KITCHEN NODE REFERENCES
-## -------------------------------------------------------------
+# KITCHEN NODE REFERENCES
 @onready var sauce_label: RichTextLabel = $Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer/Sauce
 @onready var cheese_label: RichTextLabel = $Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer/Cheese
 @onready var pepperoni_label: RichTextLabel = $Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer/Pepperoni
@@ -94,24 +87,24 @@ var tex_pepperoni: Texture2D = null
 	$Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel4/ProgressBar
 ]
 
-## Active command descriptor structures:
-## { "command": String, "completion": int, "label": RichTextLabel, "prefix": String, "action": String }
+# Active command descriptor structures:
+# { "command": String, "completion": int, "label": RichTextLabel, "prefix": String, "action": String }
 var active_kitchen_targets: Array[Dictionary] = []
 var active_counter_targets: Array[Dictionary] = []
 
-## Order spawner timer
+# Order spawner timer
 var order_timer: float = 0.0
 const ORDER_INTERVAL: float = 20.0
 
 
 func _ready() -> void:
 	# Load image textures
-	tex_uncooked = load("res://images/pizza_uncooked.png")
-	tex_cooked = load("res://images/pizza_cooked.png")
-	tex_sauce = load("res://images/sauce.png")
-	tex_cheese_unmelted = load("res://images/cheese_unmelted.png")
-	tex_cheese_melted = load("res://images/cheese_melted.png")
-	tex_pepperoni = load("res://images/pepperoni.png")
+	tex_uncooked = load("res://textures/pizza_uncooked.png")
+	tex_cooked = load("res://textures/pizza_cooked.png")
+	tex_sauce = load("res://textures/sauce.png")
+	tex_cheese_unmelted = load("res://textures/cheese_unmelted.png")
+	tex_cheese_melted = load("res://textures/cheese_melted.png")
+	tex_pepperoni = load("res://textures/pepperoni.png")
 
 	# Configure progress bars (normalized 0.0 to 1.0 for stage-based filling)
 	for bar in oven_progress_bars:
@@ -214,7 +207,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			refresh_ui()
 
 
-## Rebuilds active typing targets and syncs station visuals.
+# Rebuilds active typing targets and syncs station visuals.
 func refresh_ui() -> void:
 	build_counter_targets()
 	build_kitchen_targets()
@@ -224,10 +217,7 @@ func refresh_ui() -> void:
 	update_oven_progress()
 
 
-## -------------------------------------------------------------
-## TYPING TARGET REGISTRATION
-## -------------------------------------------------------------
-
+# TYPING TARGET REGISTRATION
 func build_counter_targets() -> void:
 	var old_completions = {}
 	for t in active_counter_targets:
@@ -309,7 +299,6 @@ func build_kitchen_targets() -> void:
 		})
 	else:
 		# 2. Pizza on table: Ingredients ("ADD SAUCE", "ADD CHEESE", "ADD PEPPERONI")
-		# STRICT: Typing just "CHEESE" does not work. You MUST type out "ADD CHEESE".
 		var topping_labels = {
 			"SAUCE": sauce_label,
 			"CHEESE": cheese_label,
@@ -451,11 +440,8 @@ func render_all_targets(targets: Array[Dictionary], is_kitchen: bool) -> void:
 				label.text = "[color=green]" + typed + "[/color]" + untyped
 
 
-## -------------------------------------------------------------
-## VISUAL SYNCHRONIZATION & PIZZA RENDERING
-## -------------------------------------------------------------
-
-## Renders a pizza with its layered ingredients and bake stage textures.
+# VISUAL SYNCHRONIZATION & PIZZA RENDERING]
+# Renders a pizza with its layered ingredients and bake stage textures.
 func update_pizza_display(base_rect: TextureRect, pizza: Pizza) -> void:
 	if base_rect == null:
 		return

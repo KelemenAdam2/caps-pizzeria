@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr246huty7y5"
-path="res://.godot/imported/pepperoni.png-f87c920b6f13f3904dac205cec1075b8.ctex"
+uid="uid://t12aly8vx41j"
+path="res://.godot/imported/cheese_unmelted.png-19a115fdb714c19e4aa9eba543b00bee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/pepperoni.png"
-dest_files=["res://.godot/imported/pepperoni.png-f87c920b6f13f3904dac205cec1075b8.ctex"]
+source_file="res://textures/cheese_unmelted.png"
+dest_files=["res://.godot/imported/cheese_unmelted.png-19a115fdb714c19e4aa9eba543b00bee.ctex"]
 
 [params]
 
