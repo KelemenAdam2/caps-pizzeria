@@ -8,7 +8,7 @@ extends RefCounted
 
 signal status_changed(new_status: Status)
 signal order_reviewed(review_data: Dictionary)
-signal order_expired()
+signal order_expired(was_active: bool)
 
 enum Status {
 	EMPTY,            ## No customer in this slot
@@ -27,6 +27,9 @@ var order_number: int = 101
 ## Customer requested toppings (e.g. ["SAUCE", "CHEESE", "PEPPERONI"])
 var requested_toppings: Array[String] = []
 
+## Slicing requirement: 1 = no slice (whole), 4 = 4 slices, 8 = 8 slices
+var requested_slices: int = 4
+
 ## Current status of this order slot
 var status: Status = Status.EMPTY
 
@@ -40,10 +43,13 @@ var max_patience: float = 80.0
 var last_review: Dictionary = {}
 
 
-func _init(p_slot_number: int = 1, p_order_number: int = 101, p_toppings: Array[String] = [], p_order_patience: float = 80.0, p_food_patience: float = 130.0) -> void:
+func _init(p_slot_number: int = 1, p_order_number: int = 101, p_toppings: Array = [], p_order_patience: float = 80.0, p_food_patience: float = 130.0, p_slices: int = 4) -> void:
 	slot_number = p_slot_number
 	order_number = p_order_number
-	requested_toppings = p_toppings.duplicate()
+	requested_toppings.clear()
+	for t in p_toppings:
+		requested_toppings.append(str(t).strip_edges().to_upper())
+	requested_slices = p_slices
 	patience_waiting_to_order = p_order_patience
 	patience_waiting_for_food = p_food_patience
 	max_patience = p_order_patience
@@ -69,9 +75,10 @@ func update_patience(delta: float) -> void:
 		patience -= delta
 		if patience <= 0.0:
 			patience = 0.0
+			var was_active = (status == Status.ACTIVE)
 			status = Status.EXPIRED
 			status_changed.emit(status)
-			order_expired.emit()
+			order_expired.emit(was_active)
 
 
 ## Reviews the given pizza when player types "give {number}".
@@ -144,10 +151,21 @@ func review_pizza(pizza: Pizza) -> Dictionary:
 
 	# 4. Slicing Evaluation (15 points)
 	var slice_score: float = 0.0
-	if pizza.is_sliced:
+	var actual_slices = pizza.slice_count
+	if actual_slices == requested_slices:
 		slice_score = 15.0
+		if requested_slices == 1:
+			feedback.append("Left whole as requested!")
+		else:
+			feedback.append("Cut into %d slices as requested!" % requested_slices)
 	else:
-		feedback.append("Not sliced!")
+		slice_score = 0.0
+		if requested_slices == 1:
+			feedback.append("I asked for NO slices, but you sliced it into %d!" % actual_slices)
+		elif actual_slices == 1:
+			feedback.append("You didn't slice it! I asked for %d slices!" % requested_slices)
+		else:
+			feedback.append("Wrong slice count! I asked for %d slices, but got %d!" % [requested_slices, actual_slices])
 	total_score += slice_score
 
 	# Calculate Stars (1 to 5)

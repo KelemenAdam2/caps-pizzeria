@@ -14,6 +14,7 @@ signal slice_queue_changed(queue: Array[Pizza])
 signal packing_station_changed(pizza: Pizza)
 signal order_slot_changed(slot_number: int, order: Order)
 signal order_reviewed(slot_number: int, review: Dictionary)
+signal order_expired(slot_number: int, was_active: bool)
 
 ## Available toppings in the kitchen
 var available_toppings: Array[String] = ["SAUCE", "CHEESE", "PEPPERONI"]
@@ -46,9 +47,12 @@ func update(delta: float) -> void:
 	for i in range(4):
 		var order = order_slots[i]
 		if order != null:
-			order.update_patience(delta)
-			if order.status == Order.Status.EXPIRED:
-				order_slot_changed.emit(i + 1, order)
+			if order.status == Order.Status.WAITING_TO_TAKE or order.status == Order.Status.ACTIVE:
+				var was_active: bool = (order.status == Order.Status.ACTIVE)
+				order.update_patience(delta)
+				if order.status == Order.Status.EXPIRED:
+					order_slot_changed.emit(i + 1, order)
+					order_expired.emit(i + 1, was_active)
 
 
 # KITCHEN ACTIONS (Uppercase / Shift held)
@@ -154,9 +158,10 @@ func take_order_by_number(target_num: int) -> bool:
 	return false
 
 
-## "slice"
+## "slice 4" or "slice 8"
 ## Slices the pizza at the head of the slice station queue.
-func slice_active_pizza() -> bool:
+## A pizza can only be sliced once.
+func slice_active_pizza(count: int = 4) -> bool:
 	if slice_queue.is_empty():
 		return false
 
@@ -164,14 +169,14 @@ func slice_active_pizza() -> bool:
 	if active_pizza.is_sliced:
 		return false # Already sliced
 
-	var ok = active_pizza.slice()
+	var ok = active_pizza.slice(count)
 	if ok:
 		slice_queue_changed.emit(slice_queue)
 	return ok
 
 
 ## "pack up"
-## Moves the sliced pizza at the head of the slice queue into the packing station box.
+## Moves the pizza at the head of the slice queue into the packing station box.
 ## Only works if the packing station is currently empty.
 func pack_up() -> bool:
 	if packing_station_pizza != null:
@@ -181,9 +186,6 @@ func pack_up() -> bool:
 		return false # No pizza to pack
 
 	var pizza = slice_queue[0]
-	if not pizza.is_sliced:
-		return false # Must slice before packing
-
 	slice_queue.remove_at(0)
 	slice_queue_changed.emit(slice_queue)
 
@@ -239,12 +241,12 @@ func give_order_by_number(target_num: int) -> Dictionary:
 
 
 ## Spawns a customer order at the given slot (1 to 4).
-func spawn_order(slot_number: int, toppings: Array[String], p_order_patience: float = 80.0, p_food_patience: float = 130.0) -> Order:
+func spawn_order(slot_number: int, toppings: Array, p_order_patience: float = 80.0, p_food_patience: float = 130.0, p_slices: int = 4) -> Order:
 	if slot_number < 1 or slot_number > 4:
 		return null
 	var num = next_order_number
 	next_order_number += 1
-	var new_order = Order.new(slot_number, num, toppings, p_order_patience, p_food_patience)
+	var new_order = Order.new(slot_number, num, toppings, p_order_patience, p_food_patience, p_slices)
 	order_slots[slot_number - 1] = new_order
 	order_slot_changed.emit(slot_number, new_order)
 	return new_order
@@ -292,10 +294,11 @@ func get_valid_counter_commands() -> Array[String]:
 
 	# Slicing station commands
 	if not slice_queue.is_empty() and not slice_queue[0].is_sliced:
-		commands.append("slice")
+		commands.append("slice 4")
+		commands.append("slice 8")
 
-	# Packing station commands
-	if not slice_queue.is_empty() and slice_queue[0].is_sliced and packing_station_pizza == null:
+	# Packing station commands (can pack if uncut or sliced, provided box is free)
+	if not slice_queue.is_empty() and packing_station_pizza == null:
 		commands.append("pack up")
 
 	if packing_station_pizza != null:
@@ -331,8 +334,12 @@ func execute_command(command: String) -> bool:
 		if num_str.is_valid_int():
 			var review = give_order_by_number(num_str.to_int())
 			return not review.is_empty()
+	elif command == "slice 4":
+		return slice_active_pizza(4)
+	elif command == "slice 8":
+		return slice_active_pizza(8)
 	elif command == "slice":
-		return slice_active_pizza()
+		return slice_active_pizza(4)
 	elif command == "pack up":
 		return pack_up()
 	elif command == "trash":

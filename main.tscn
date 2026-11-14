@@ -2,6 +2,62 @@
 
 [ext_resource type="Theme" uid="uid://d0l0s56hclvhv" path="res://global_theme.tres" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://bah5313mkqth2" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://be56oyawqvxhm" path="res://textures/board.png" id="3_5vw27"]
+[ext_resource type="Texture2D" uid="uid://dua3vboigr8lv" path="res://textures/slice1_order.png" id="3_efxa6"]
+[ext_resource type="Texture2D" uid="uid://ch4cl6l66h3qa" path="res://textures/slice4_order.png" id="4_dg77c"]
+[ext_resource type="Texture2D" uid="uid://cqsxxu6fmg4t2" path="res://textures/box_open.png" id="4_kek77"]
+[ext_resource type="Texture2D" uid="uid://c0bioer60jnqx" path="res://textures/coin.png" id="5_4c57u"]
+[ext_resource type="Texture2D" uid="uid://cnrrxbyy3t5kg" path="res://textures/slice8_order.png" id="5_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://h0l3177efp37" path="res://textures/time.png" id="6_efxa6"]
+[ext_resource type="Texture2D" uid="uid://rb0m23uioh0w" path="res://textures/lock.png" id="7_dg77c"]
+[ext_resource type="Texture2D" uid="uid://bk1okx6bkmc30" path="res://textures/oven_off.png" id="8_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://cvpr0nlgwp3q8" path="res://textures/timesup.png" id="12_dg77c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
+bg_color = Color(0.2538426, 0.2538428, 0.25384274, 0.49019608)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wunbd"]
+texture = ExtResource("8_ycdy4")
+expand_margin_top = 80.0
+expand_margin_bottom = 80.0
+
+[sub_resource type="DPITexture" id="DPITexture_w48qg"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_vivmo"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\"/></svg>
+"
+premult_alpha = true
+base_scale = 1.46
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_criqo"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wunbd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgyoi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ycdy4"]
+bg_color = Color(0, 0, 0, 0.50980395)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [node name="Main" type="Control" unique_id=1155888874]
 layout_mode = 3
@@ -14,7 +70,6 @@ theme = ExtResource("1_0xm2m")
 script = ExtResource("1_ig7tw")
 
 [node name="Counter" type="Control" parent="." unique_id=851193503]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +86,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.6378959, 0.63789576, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="Counter" unique_id=1089444245]
+[node name="MainMargin" type="MarginContainer" parent="Counter" unique_id=1089444245]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,52 +98,117 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer" unique_id=398921276]
+[node name="MainVBox" type="VBoxContainer" parent="Counter/MainMargin" unique_id=398921276]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Counter/MarginContainer/VBoxContainer" unique_id=1393304638]
+[node name="OrderPanel" type="PanelContainer" parent="Counter/MainMargin/MainVBox" unique_id=1393304638]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.53
 
-[node name="MarginContainer" type="MarginContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer" unique_id=1634537008]
+[node name="OrderMargin" type="MarginContainer" parent="Counter/MainMargin/MainVBox/OrderPanel" unique_id=1634537008]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="OrderCont" type="HBoxContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer" unique_id=265452371]
+[node name="OrderHbox" type="HBoxContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin" unique_id=265452371]
 layout_mode = 2
 
-[node name="OrderSlot1" type="PanelContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont" unique_id=1872915355]
+[node name="OrderSlot1" type="PanelContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox" unique_id=1872915355]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1" unique_id=2011397771]
+[node name="OrderMargin" type="MarginContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1" unique_id=2011397771]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1/MarginContainer" unique_id=163863297]
+[node name="OrderVBox" type="VBoxContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin" unique_id=163863297]
 layout_mode = 2
 
-[node name="TitleLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1/MarginContainer/VBoxContainer" unique_id=120131649]
+[node name="TitlePanel" type="Panel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox" unique_id=1535987207]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="TitleLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/TitlePanel" unique_id=120131649]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 274.0
+offset_bottom = 39.0
 text = "Order #101"
 horizontal_alignment = 1
 
-[node name="ToppingLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1/MarginContainer/VBoxContainer" unique_id=1647453882]
+[node name="ToppingPanel" type="Panel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox" unique_id=1246446426]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="ToppingVBox" type="VBoxContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel" unique_id=580581895]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ToppingLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox" unique_id=1647453882]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
 text = "Toppings:
  + Sauce
  + Cheese
  + Pepperoni"
 
-[node name="TakeOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1/MarginContainer/VBoxContainer" unique_id=204148903]
+[node name="SliceIndHBox" type="HBoxContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox" unique_id=444829858]
+layout_mode = 2
+
+[node name="VSeparator3" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1777751791]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Slice1" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=2043532966]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_efxa6")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="VSeparator2" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=549645002]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Slice4" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=192327227]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_dg77c")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="VSeparator" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1135344437]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Slice8" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=168681137]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("5_ycdy4")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="VSeparator4" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=9021342]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="TakeOrder" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox" unique_id=204148903]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_0xm2m")
@@ -99,7 +219,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GiveOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1/MarginContainer/VBoxContainer" unique_id=493313346]
+[node name="GiveOrder" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox" unique_id=493313346]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_0xm2m")
@@ -110,34 +230,99 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OrderSlot2" type="PanelContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont" unique_id=1719965371]
+[node name="OrderSlot2" type="PanelContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox" unique_id=318663637]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2" unique_id=455929547]
+[node name="OrderMargin" type="MarginContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2" unique_id=95373827]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2/MarginContainer" unique_id=1490458772]
+[node name="OrderVBox" type="VBoxContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin" unique_id=1402871579]
 layout_mode = 2
 
-[node name="TitleLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2/MarginContainer/VBoxContainer" unique_id=953309686]
+[node name="TitlePanel" type="Panel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox" unique_id=411922974]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="TitleLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/TitlePanel" unique_id=652954769]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 274.0
+offset_bottom = 39.0
 text = "Order #101"
 horizontal_alignment = 1
 
-[node name="ToppingLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2/MarginContainer/VBoxContainer" unique_id=302136918]
+[node name="ToppingPanel" type="Panel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox" unique_id=1070726672]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="ToppingVBox" type="VBoxContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel" unique_id=891090327]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ToppingLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox" unique_id=487895030]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
 text = "Toppings:
  + Sauce
  + Cheese
  + Pepperoni"
 
-[node name="TakeOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2/MarginContainer/VBoxContainer" unique_id=931874388]
+[node name="SliceIndHBox" type="HBoxContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox" unique_id=418933632]
+layout_mode = 2
+
+[node name="VSeparator3" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=340012323]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Slice1" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=765844913]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_efxa6")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="VSeparator2" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1981340443]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Slice4" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=235699643]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_dg77c")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="VSeparator" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=471505]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Slice8" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1650425813]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("5_ycdy4")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="VSeparator4" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1664869349]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="TakeOrder" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox" unique_id=999465153]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_0xm2m")
@@ -148,7 +333,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GiveOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2/MarginContainer/VBoxContainer" unique_id=315847980]
+[node name="GiveOrder" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox" unique_id=404185074]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_0xm2m")
@@ -159,34 +344,99 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OrderSlot3" type="PanelContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont" unique_id=596196836]
+[node name="OrderSlot3" type="PanelContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox" unique_id=30877756]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3" unique_id=2038124801]
+[node name="OrderMargin" type="MarginContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3" unique_id=56936970]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3/MarginContainer" unique_id=264641439]
+[node name="OrderVBox" type="VBoxContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin" unique_id=952474220]
 layout_mode = 2
 
-[node name="TitleLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3/MarginContainer/VBoxContainer" unique_id=500965265]
+[node name="TitlePanel" type="Panel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox" unique_id=1791775310]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="TitleLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/TitlePanel" unique_id=376676371]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 274.0
+offset_bottom = 39.0
 text = "Order #101"
 horizontal_alignment = 1
 
-[node name="ToppingLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3/MarginContainer/VBoxContainer" unique_id=1135482535]
+[node name="ToppingPanel" type="Panel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox" unique_id=1852602221]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="ToppingVBox" type="VBoxContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel" unique_id=1772346234]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ToppingLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox" unique_id=1306130834]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
 text = "Toppings:
  + Sauce
  + Cheese
  + Pepperoni"
 
-[node name="TakeOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3/MarginContainer/VBoxContainer" unique_id=404407528]
+[node name="SliceIndHBox" type="HBoxContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox" unique_id=785060565]
+layout_mode = 2
+
+[node name="VSeparator3" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1885699511]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Slice1" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=576823494]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_efxa6")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="VSeparator2" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1007614416]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Slice4" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=605962893]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_dg77c")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="VSeparator" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=215065885]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Slice8" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=482111683]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("5_ycdy4")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="VSeparator4" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1014290808]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="TakeOrder" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox" unique_id=1652919717]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_0xm2m")
@@ -197,7 +447,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GiveOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3/MarginContainer/VBoxContainer" unique_id=1552863737]
+[node name="GiveOrder" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox" unique_id=1535310543]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_0xm2m")
@@ -208,34 +458,99 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OrderSlot4" type="PanelContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont" unique_id=1421500209]
+[node name="OrderSlot4" type="PanelContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox" unique_id=157897728]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4" unique_id=1117388184]
+[node name="OrderMargin" type="MarginContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4" unique_id=867105613]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4/MarginContainer" unique_id=1070473424]
+[node name="OrderVBox" type="VBoxContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin" unique_id=1755558458]
 layout_mode = 2
 
-[node name="TitleLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4/MarginContainer/VBoxContainer" unique_id=850105110]
+[node name="TitlePanel" type="Panel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox" unique_id=160913450]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="TitleLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/TitlePanel" unique_id=1350013934]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 274.0
+offset_bottom = 39.0
 text = "Order #101"
 horizontal_alignment = 1
 
-[node name="ToppingLbl" type="Label" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4/MarginContainer/VBoxContainer" unique_id=1895606580]
+[node name="ToppingPanel" type="Panel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox" unique_id=1181364767]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="ToppingVBox" type="VBoxContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel" unique_id=660672307]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ToppingLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox" unique_id=1016370404]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
 text = "Toppings:
  + Sauce
  + Cheese
  + Pepperoni"
 
-[node name="TakeOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4/MarginContainer/VBoxContainer" unique_id=474460711]
+[node name="SliceIndHBox" type="HBoxContainer" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox" unique_id=501341726]
+layout_mode = 2
+
+[node name="VSeparator3" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=894407414]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Slice1" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=819719656]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_efxa6")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="VSeparator2" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1974638891]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Slice4" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=811295021]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_dg77c")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="VSeparator" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=164965468]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Slice8" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1645514803]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("5_ycdy4")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="VSeparator4" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1771062812]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="TakeOrder" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox" unique_id=1260388304]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_0xm2m")
@@ -246,7 +561,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GiveOrder" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4/MarginContainer/VBoxContainer" unique_id=545595418]
+[node name="GiveOrder" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox" unique_id=1612460637]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_0xm2m")
@@ -257,59 +572,103 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CounterCont" type="HBoxContainer" parent="Counter/MarginContainer/VBoxContainer" unique_id=122398822]
+[node name="CounterContainer" type="HBoxContainer" parent="Counter/MainMargin/MainVBox" unique_id=122398822]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SlicePanel" type="PanelContainer" parent="Counter/MarginContainer/VBoxContainer/CounterCont" unique_id=38964991]
+[node name="SlicePanel" type="PanelContainer" parent="Counter/MainMargin/MainVBox/CounterContainer" unique_id=38964991]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Counter/MarginContainer/VBoxContainer/CounterCont/SlicePanel" unique_id=633011006]
+[node name="SliceMargin" type="MarginContainer" parent="Counter/MainMargin/MainVBox/CounterContainer/SlicePanel" unique_id=633011006]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer/VBoxContainer/CounterCont/SlicePanel/MarginContainer" unique_id=182600035]
+[node name="SliceVBox" type="VBoxContainer" parent="Counter/MainMargin/MainVBox/CounterContainer/SlicePanel/SliceMargin" unique_id=182600035]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Counter/MarginContainer/VBoxContainer/CounterCont/SlicePanel/MarginContainer/VBoxContainer" unique_id=181878199]
+[node name="BoardTexture" type="TextureRect" parent="Counter/MainMargin/MainVBox/CounterContainer/SlicePanel/SliceMargin/SliceVBox" unique_id=1779423747]
+custom_minimum_size = Vector2(0, 220.47)
+custom_maximum_size = Vector2(-1, 239.72)
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 18.79
+texture = ExtResource("3_5vw27")
+expand_mode = 2
+stretch_mode = 6
 
-[node name="Slice" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/CounterCont/SlicePanel/MarginContainer/VBoxContainer" unique_id=1070014943]
+[node name="SliceTexture" type="TextureRect" parent="Counter/MainMargin/MainVBox/CounterContainer/SlicePanel/SliceMargin/SliceVBox/BoardTexture" unique_id=181878199]
+layout_mode = 0
+offset_top = 187.0
+offset_right = 387.0
+offset_bottom = 197.0
+size_flags_vertical = 3
+
+[node name="SliceHBox" type="HBoxContainer" parent="Counter/MainMargin/MainVBox/CounterContainer/SlicePanel/SliceMargin/SliceVBox" unique_id=1084353344]
 layout_mode = 2
-size_flags_horizontal = 4
+
+[node name="Slice4" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/CounterContainer/SlicePanel/SliceMargin/SliceVBox/SliceHBox" unique_id=1070014943]
+layout_mode = 2
+size_flags_horizontal = 10
 theme = ExtResource("1_0xm2m")
 bbcode_enabled = true
-text = "slice
+text = "slice 4"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="Counter/MainMargin/MainVBox/CounterContainer/SlicePanel/SliceMargin/SliceVBox/SliceHBox" unique_id=907865833]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.23
+
+[node name="Slice8" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/CounterContainer/SlicePanel/SliceMargin/SliceVBox/SliceHBox" unique_id=980989502]
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("1_0xm2m")
+bbcode_enabled = true
+text = "slice 8
 "
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BoxPanel" type="PanelContainer" parent="Counter/MarginContainer/VBoxContainer/CounterCont" unique_id=242600797]
+[node name="BoxPanel" type="PanelContainer" parent="Counter/MainMargin/MainVBox/CounterContainer" unique_id=242600797]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Counter/MarginContainer/VBoxContainer/CounterCont/BoxPanel" unique_id=1626999366]
+[node name="BoxTexture" type="TextureRect" parent="Counter/MainMargin/MainVBox/CounterContainer/BoxPanel" unique_id=1644098306]
+custom_maximum_size = Vector2(238, 238)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+texture = ExtResource("4_kek77")
+
+[node name="BoxMargin" type="MarginContainer" parent="Counter/MainMargin/MainVBox/CounterContainer/BoxPanel" unique_id=1626999366]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer/VBoxContainer/CounterCont/BoxPanel/MarginContainer" unique_id=566731191]
+[node name="BoxVBox" type="VBoxContainer" parent="Counter/MainMargin/MainVBox/CounterContainer/BoxPanel/BoxMargin" unique_id=566731191]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Counter/MarginContainer/VBoxContainer/CounterCont/BoxPanel/MarginContainer/VBoxContainer" unique_id=165628256]
+[node name="HSeparator" type="HSeparator" parent="Counter/MainMargin/MainVBox/CounterContainer/BoxPanel/BoxMargin/BoxVBox" unique_id=1038455933]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.29
+
+[node name="BoxTexture" type="TextureRect" parent="Counter/MainMargin/MainVBox/CounterContainer/BoxPanel/BoxMargin/BoxVBox" unique_id=165628256]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PackUp" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/CounterCont/BoxPanel/MarginContainer/VBoxContainer" unique_id=1217196008]
+[node name="PackUp" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/CounterContainer/BoxPanel/BoxMargin/BoxVBox" unique_id=1217196008]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_0xm2m")
@@ -320,15 +679,78 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MarginContainer/VBoxContainer/CounterCont" unique_id=320685528]
+[node name="VBoxContainer" type="VBoxContainer" parent="Counter/MainMargin/MainVBox/CounterContainer" unique_id=320685528]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HSeparator" type="HSeparator" parent="Counter/MarginContainer/VBoxContainer/CounterCont/VBoxContainer" unique_id=1935810994]
+[node name="MoneyPanel" type="Panel" parent="Counter/MainMargin/MainVBox/CounterContainer/VBoxContainer" unique_id=1209016840]
+custom_minimum_size = Vector2(238.75, 68.45)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 4
+size_flags_vertical = 10
 
-[node name="Trash" type="RichTextLabel" parent="Counter/MarginContainer/VBoxContainer/CounterCont/VBoxContainer" unique_id=842713409]
+[node name="TextureRect" type="TextureRect" parent="Counter/MainMargin/MainVBox/CounterContainer/VBoxContainer/MoneyPanel" unique_id=1477693160]
+custom_maximum_size = Vector2(130, 130)
+layout_mode = 0
+offset_left = -14.0
+offset_top = -47.549988
+offset_right = 116.0
+offset_bottom = 82.45001
+texture = ExtResource("5_4c57u")
+
+[node name="Money" type="Label" parent="Counter/MainMargin/MainVBox/CounterContainer/VBoxContainer/MoneyPanel" unique_id=1339681628]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -139.75
+offset_top = -36.774994
+offset_bottom = 38.225006
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "300"
+horizontal_alignment = 1
+
+[node name="TimePanel" type="Panel" parent="Counter/MainMargin/MainVBox/CounterContainer/VBoxContainer" unique_id=450566326]
+custom_minimum_size = Vector2(238.75, 68.45)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+
+[node name="Time" type="Label" parent="Counter/MainMargin/MainVBox/CounterContainer/VBoxContainer/TimePanel" unique_id=1350169623]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.37501
+offset_top = -36.774963
+offset_right = 36.754333
+offset_bottom = 38.225037
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.0024324441
+theme_override_font_sizes/font_size = 40
+text = "00:59"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Counter/MainMargin/MainVBox/CounterContainer/VBoxContainer/TimePanel" unique_id=655159976]
+custom_maximum_size = Vector2(140, 140)
+layout_mode = 0
+offset_left = 131.0
+offset_top = -51.549988
+offset_right = 271.0
+offset_bottom = 88.45001
+texture = ExtResource("6_efxa6")
+
+[node name="HSeparator" type="HSeparator" parent="Counter/MainMargin/MainVBox/CounterContainer/VBoxContainer" unique_id=1543621959]
+layout_mode = 2
+
+[node name="Trash" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/CounterContainer/VBoxContainer" unique_id=842713409]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_0xm2m")
@@ -340,6 +762,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Kitchen" type="Control" parent="." unique_id=1939085942]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -356,7 +779,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0.63144255, 0.5751866, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="Kitchen" unique_id=53833935]
+[node name="MainContainer" type="MarginContainer" parent="Kitchen" unique_id=53833935]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -368,38 +791,38 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Kitchen/MarginContainer" unique_id=1965790674]
+[node name="MainHBox" type="HBoxContainer" parent="Kitchen/MainContainer" unique_id=1965790674]
 layout_mode = 2
 
-[node name="MainPanel" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer" unique_id=852822770]
+[node name="StationPanel" type="PanelContainer" parent="Kitchen/MainContainer/MainHBox" unique_id=852822770]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.58
 
-[node name="MarginContainer" type="MarginContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel" unique_id=1563494948]
+[node name="StationMargin" type="MarginContainer" parent="Kitchen/MainContainer/MainHBox/StationPanel" unique_id=1563494948]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer" unique_id=1635520998]
+[node name="StationHBox" type="HBoxContainer" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin" unique_id=1635520998]
 layout_mode = 2
 
-[node name="IngPanel" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer" unique_id=1771336553]
+[node name="IngPanel" type="PanelContainer" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox" unique_id=1771336553]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel" unique_id=955798426]
+[node name="IngMargin" type="MarginContainer" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/IngPanel" unique_id=955798426]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer" unique_id=40800096]
+[node name="IngVBox" type="VBoxContainer" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/IngPanel/IngMargin" unique_id=40800096]
 layout_mode = 2
 
-[node name="Sauce" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer" unique_id=370448702]
+[node name="Sauce" type="RichTextLabel" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/IngPanel/IngMargin/IngVBox" unique_id=370448702]
 layout_mode = 2
 theme = ExtResource("1_0xm2m")
 bbcode_enabled = true
@@ -409,7 +832,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Cheese" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer" unique_id=1565214082]
+[node name="Cheese" type="RichTextLabel" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/IngPanel/IngMargin/IngVBox" unique_id=1565214082]
 layout_mode = 2
 theme = ExtResource("1_0xm2m")
 bbcode_enabled = true
@@ -419,7 +842,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Pepperoni" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer" unique_id=889186135]
+[node name="Pepperoni" type="RichTextLabel" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/IngPanel/IngMargin/IngVBox" unique_id=889186135]
 layout_mode = 2
 theme = ExtResource("1_0xm2m")
 bbcode_enabled = true
@@ -429,11 +852,51 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer" unique_id=60007599]
+[node name="Panel" type="Panel" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/IngPanel/IngMargin/IngVBox" unique_id=995983311]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_0xm2m")
 
-[node name="MakeDough" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer" unique_id=1929571136]
+[node name="LockedTexture" type="TextureRect" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/IngPanel/IngMargin/IngVBox/Panel" unique_id=1861591754]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.5
+offset_top = -83.5
+offset_right = 65.5
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_dg77c")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="LockedLbl" type="Label" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/IngPanel/IngMargin/IngVBox/Panel" unique_id=528311669]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.5
+offset_top = -4.5
+offset_right = 58.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "LOCKED"
+
+[node name="HSeparator" type="HSeparator" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/IngPanel/IngMargin/IngVBox" unique_id=60007599]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="MakeDough" type="RichTextLabel" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/IngPanel/IngMargin/IngVBox" unique_id=1929571136]
 layout_mode = 2
 theme = ExtResource("1_0xm2m")
 bbcode_enabled = true
@@ -443,25 +906,25 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PizzaPanel" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer" unique_id=805793271]
+[node name="PizzaPanel" type="PanelContainer" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox" unique_id=805793271]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel" unique_id=1161271038]
+[node name="PizzaMargin" type="MarginContainer" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/PizzaPanel" unique_id=1161271038]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer" unique_id=535086563]
+[node name="PizzaVBox" type="VBoxContainer" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/PizzaPanel/PizzaMargin" unique_id=535086563]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer" unique_id=1999299707]
+[node name="HSeparator" type="HSeparator" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/PizzaPanel/PizzaMargin/PizzaVBox" unique_id=1999299707]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Add" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer" unique_id=688408776]
+[node name="Add" type="RichTextLabel" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/PizzaPanel/PizzaMargin/PizzaVBox" unique_id=688408776]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_0xm2m")
@@ -472,12 +935,25 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer" unique_id=662177299]
+[node name="BoardTexture" type="TextureRect" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/PizzaPanel/PizzaMargin/PizzaVBox" unique_id=662177299]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 18.79
+texture = ExtResource("3_5vw27")
+expand_mode = 3
+stretch_mode = 6
 
-[node name="IntoOven" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer" unique_id=1606123515]
+[node name="PizzaTexture" type="TextureRect" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/PizzaPanel/PizzaMargin/PizzaVBox/BoardTexture" unique_id=1562253078]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 18.79
+
+[node name="IntoOven" type="RichTextLabel" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/PizzaPanel/PizzaMargin/PizzaVBox" unique_id=1606123515]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_0xm2m")
@@ -488,11 +964,11 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator2" type="HSeparator" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer" unique_id=850806438]
+[node name="HSeparator2" type="HSeparator" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/PizzaPanel/PizzaMargin/PizzaVBox" unique_id=850806438]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Trash" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer" unique_id=987134880]
+[node name="Trash" type="RichTextLabel" parent="Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/PizzaPanel/PizzaMargin/PizzaVBox" unique_id=987134880]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("1_0xm2m")
@@ -503,21 +979,21 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OvenPanel" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer" unique_id=548618329]
+[node name="OvenPanel" type="PanelContainer" parent="Kitchen/MainContainer/MainHBox" unique_id=548618329]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel" unique_id=1250931458]
+[node name="OvenMargin" type="MarginContainer" parent="Kitchen/MainContainer/MainHBox/OvenPanel" unique_id=1250931458]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer" unique_id=1870786933]
+[node name="OvenVBox" type="VBoxContainer" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin" unique_id=1870786933]
 layout_mode = 2
 
-[node name="TakeOut" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer" unique_id=1717259948]
+[node name="TakeOut" type="RichTextLabel" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox" unique_id=1717259948]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("1_0xm2m")
@@ -528,23 +1004,21 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OvenPanel1" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer" unique_id=45919395]
+[node name="OvenPanel1" type="PanelContainer" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox" unique_id=45919395]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_wunbd")
 
-[node name="TextureRect" type="TextureRect" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel1" unique_id=1232584598]
+[node name="CommandContainer" type="MarginContainer" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel1" unique_id=494691675]
+custom_minimum_size = Vector2(55.63, 76.09)
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 
-[node name="1" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel1/TextureRect" unique_id=380383865]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -22.5
-offset_right = 34.0
-offset_bottom = 22.5
-grow_vertical = 2
-size_flags_horizontal = 4
+[node name="1" type="RichTextLabel" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel1/CommandContainer" unique_id=380383865]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
 theme = ExtResource("1_0xm2m")
 bbcode_enabled = true
 text = "1"
@@ -553,31 +1027,37 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel1" unique_id=580662055]
-custom_minimum_size = Vector2(279.17, 25.61)
+[node name="HSlider" type="HSlider" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel1" unique_id=1825952846]
+custom_minimum_size = Vector2(290, 50)
+custom_maximum_size = Vector2(290, -1)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-rounded = true
-show_percentage = false
+mouse_filter = 2
+theme_override_icons/grabber = SubResource("DPITexture_w48qg")
+theme_override_icons/grabber_disabled = SubResource("DPITexture_vivmo")
+theme_override_styles/slider = SubResource("StyleBoxFlat_criqo")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_wunbd")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_kgyoi")
+max_value = 40.0
+editable = false
+scrollable = false
 
-[node name="OvenPanel2" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer" unique_id=1548406641]
+[node name="OvenPanel2" type="PanelContainer" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox" unique_id=67227169]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_wunbd")
 
-[node name="TextureRect" type="TextureRect" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel2" unique_id=1189429640]
+[node name="CommandContainer" type="MarginContainer" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel2" unique_id=1674184872]
+custom_minimum_size = Vector2(55.63, 76.09)
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 
-[node name="2" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel2/TextureRect" unique_id=816298667]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -22.5
-offset_right = 34.0
-offset_bottom = 22.5
-grow_vertical = 2
-size_flags_horizontal = 4
+[node name="2" type="RichTextLabel" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel2/CommandContainer" unique_id=276518152]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
 theme = ExtResource("1_0xm2m")
 bbcode_enabled = true
 text = "2"
@@ -586,31 +1066,37 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel2" unique_id=59270165]
-custom_minimum_size = Vector2(279.17, 25.61)
+[node name="HSlider" type="HSlider" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel2" unique_id=1131271847]
+custom_minimum_size = Vector2(290, 50)
+custom_maximum_size = Vector2(290, -1)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-rounded = true
-show_percentage = false
+mouse_filter = 2
+theme_override_icons/grabber = SubResource("DPITexture_w48qg")
+theme_override_icons/grabber_disabled = SubResource("DPITexture_vivmo")
+theme_override_styles/slider = SubResource("StyleBoxFlat_criqo")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_wunbd")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_kgyoi")
+max_value = 40.0
+editable = false
+scrollable = false
 
-[node name="OvenPanel3" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer" unique_id=256095336]
+[node name="OvenPanel3" type="PanelContainer" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox" unique_id=1760644178]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_wunbd")
 
-[node name="TextureRect" type="TextureRect" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel3" unique_id=1512423301]
+[node name="CommandContainer" type="MarginContainer" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel3" unique_id=1991420220]
+custom_minimum_size = Vector2(55.63, 76.09)
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 
-[node name="3" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel3/TextureRect" unique_id=1941744080]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -22.5
-offset_right = 34.0
-offset_bottom = 22.5
-grow_vertical = 2
-size_flags_horizontal = 4
+[node name="3" type="RichTextLabel" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel3/CommandContainer" unique_id=544140462]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
 theme = ExtResource("1_0xm2m")
 bbcode_enabled = true
 text = "3"
@@ -619,31 +1105,37 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel3" unique_id=810645143]
-custom_minimum_size = Vector2(279.17, 25.61)
+[node name="HSlider" type="HSlider" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel3" unique_id=511293726]
+custom_minimum_size = Vector2(290, 50)
+custom_maximum_size = Vector2(290, -1)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-rounded = true
-show_percentage = false
+mouse_filter = 2
+theme_override_icons/grabber = SubResource("DPITexture_w48qg")
+theme_override_icons/grabber_disabled = SubResource("DPITexture_vivmo")
+theme_override_styles/slider = SubResource("StyleBoxFlat_criqo")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_wunbd")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_kgyoi")
+max_value = 40.0
+editable = false
+scrollable = false
 
-[node name="OvenPanel4" type="PanelContainer" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer" unique_id=1578714203]
+[node name="OvenPanel4" type="PanelContainer" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox" unique_id=782055911]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_wunbd")
 
-[node name="TextureRect" type="TextureRect" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel4" unique_id=991811348]
+[node name="CommandContainer" type="MarginContainer" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel4" unique_id=694490012]
+custom_minimum_size = Vector2(55.63, 76.09)
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 
-[node name="4" type="RichTextLabel" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel4/TextureRect" unique_id=251801333]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -22.5
-offset_right = 34.0
-offset_bottom = 22.5
-grow_vertical = 2
-size_flags_horizontal = 4
+[node name="4" type="RichTextLabel" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel4/CommandContainer" unique_id=1358686929]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
 theme = ExtResource("1_0xm2m")
 bbcode_enabled = true
 text = "4"
@@ -652,10 +1144,43 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel4" unique_id=512753965]
-custom_minimum_size = Vector2(279.17, 25.61)
+[node name="HSlider" type="HSlider" parent="Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel4" unique_id=1207416641]
+custom_minimum_size = Vector2(290, 50)
+custom_maximum_size = Vector2(290, -1)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-rounded = true
-show_percentage = false
+mouse_filter = 2
+theme_override_icons/grabber = SubResource("DPITexture_w48qg")
+theme_override_icons/grabber_disabled = SubResource("DPITexture_vivmo")
+theme_override_styles/slider = SubResource("StyleBoxFlat_criqo")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_wunbd")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_kgyoi")
+max_value = 40.0
+editable = false
+scrollable = false
+
+[node name="TimeUpPanel" type="Panel" parent="." unique_id=1054076937]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ycdy4")
+
+[node name="TextureRect" type="TextureRect" parent="TimeUpPanel" unique_id=1641781546]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_dg77c")

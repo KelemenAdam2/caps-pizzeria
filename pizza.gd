@@ -29,6 +29,7 @@ var oven_slot: int = -1 # 1 to 4, or -1 when not in an oven
 var cook_time: float = 0.0
 
 ## Counter preparation states
+var slice_count: int = 1 # 1 = no slice (whole), 4 = 4 slices, 8 = 8 slices
 var is_sliced: bool = false
 var is_boxed: bool = false
 
@@ -38,6 +39,7 @@ func _init() -> void:
 	is_in_oven = false
 	oven_slot = -1
 	cook_time = 0.0
+	slice_count = 1
 	is_sliced = false
 	is_boxed = false
 
@@ -103,18 +105,19 @@ func get_doneness_name() -> String:
 	return "Unknown"
 
 
-## Slices the pizza at the slicing counter.
-func slice() -> bool:
+## Slices the pizza at the slicing counter into 4 or 8 slices.
+## A pizza can only be sliced once.
+func slice(count: int = 4) -> bool:
 	if not is_sliced:
 		is_sliced = true
+		slice_count = count
 		return true
 	return false
 
 
 ## Packs the pizza into a box at the packing station.
-## Must be sliced before it can be boxed.
 func box() -> bool:
-	if is_sliced and not is_boxed:
+	if not is_boxed:
 		is_boxed = true
 		return true
 	return false

@@ -1,10 +1,14 @@
 [gd_resource type="Theme" format=3 uid="uid://d0l0s56hclvhv"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l7yju"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wunbd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgyoi"]
 content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wunbd"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
@@ -35,10 +39,15 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8y8jq"]
+
 [resource]
+HSeparator/styles/separator = SubResource("StyleBoxEmpty_wunbd")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/font_sizes/font_size = 25
-Label/styles/normal = SubResource("StyleBoxFlat_l7yju")
+Label/styles/normal = SubResource("StyleBoxEmpty_kgyoi")
+Panel/styles/panel = SubResource("StyleBoxFlat_wunbd")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_ofusn")
 RichTextLabel/font_sizes/normal_font_size = 25
 RichTextLabel/styles/normal = SubResource("StyleBoxFlat_ig7tw")
+VSeparator/styles/separator = SubResource("StyleBoxEmpty_8y8jq")

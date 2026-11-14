@@ -2,6 +2,7 @@ extends Control
 
 @onready var counter: Control = $Counter
 @onready var kitchen: Control = $Kitchen
+@onready var time_up_panel: Panel = $TimeUpPanel
 
 var pizzeria: PizzeriaState = PizzeriaState.new()
 
@@ -12,79 +13,112 @@ var tex_sauce: Texture2D = null
 var tex_cheese_unmelted: Texture2D = null
 var tex_cheese_melted: Texture2D = null
 var tex_pepperoni: Texture2D = null
+var tex_slice4: Texture2D = null
+var tex_slice8: Texture2D = null
+var tex_slice1_order: Texture2D = null
+var tex_slice4_order: Texture2D = null
+var tex_slice8_order: Texture2D = null
+var tex_box_open: Texture2D = null
+var tex_box_closed: Texture2D = null
+var tex_timesup: Texture2D = null
+
+# OVEN STYLEBOXES
+var style_oven_on: StyleBoxTexture = null
+var style_oven_off: StyleBoxTexture = null
+
+# GAME TIMER & MONEY TRACKER
+var game_time: float = 120.0 # 2 minutes countdown
+var money: int = 0
+var is_game_over: bool = false
 
 # COUNTER NODE REFERENCES
 @onready var order_slot_nodes = [
 	{
-		"container": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1,
-		"title": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1/MarginContainer/VBoxContainer/TitleLbl,
-		"toppings": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1/MarginContainer/VBoxContainer/ToppingLbl,
-		"take_order": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1/MarginContainer/VBoxContainer/TakeOrder,
-		"give_order": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot1/MarginContainer/VBoxContainer/GiveOrder,
+		"container": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1,
+		"title": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/TitlePanel/TitleLbl,
+		"toppings": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/ToppingLbl,
+		"slice_1": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox/Slice1,
+		"slice_4": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox/Slice4,
+		"slice_8": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox/Slice8,
+		"take_order": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/TakeOrder,
+		"give_order": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/GiveOrder,
 	},
 	{
-		"container": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2,
-		"title": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2/MarginContainer/VBoxContainer/TitleLbl,
-		"toppings": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2/MarginContainer/VBoxContainer/ToppingLbl,
-		"take_order": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2/MarginContainer/VBoxContainer/TakeOrder,
-		"give_order": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot2/MarginContainer/VBoxContainer/GiveOrder,
+		"container": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2,
+		"title": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/TitlePanel/TitleLbl,
+		"toppings": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/ToppingLbl,
+		"slice_1": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox/Slice1,
+		"slice_4": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox/Slice4,
+		"slice_8": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox/Slice8,
+		"take_order": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/TakeOrder,
+		"give_order": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/GiveOrder,
 	},
 	{
-		"container": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3,
-		"title": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3/MarginContainer/VBoxContainer/TitleLbl,
-		"toppings": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3/MarginContainer/VBoxContainer/ToppingLbl,
-		"take_order": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3/MarginContainer/VBoxContainer/TakeOrder,
-		"give_order": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot3/MarginContainer/VBoxContainer/GiveOrder,
+		"container": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3,
+		"title": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/TitlePanel/TitleLbl,
+		"toppings": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/ToppingLbl,
+		"slice_1": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox/Slice1,
+		"slice_4": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox/Slice4,
+		"slice_8": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox/Slice8,
+		"take_order": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/TakeOrder,
+		"give_order": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/GiveOrder,
 	},
 	{
-		"container": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4,
-		"title": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4/MarginContainer/VBoxContainer/TitleLbl,
-		"toppings": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4/MarginContainer/VBoxContainer/ToppingLbl,
-		"take_order": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4/MarginContainer/VBoxContainer/TakeOrder,
-		"give_order": $Counter/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/OrderCont/OrderSlot4/MarginContainer/VBoxContainer/GiveOrder,
+		"container": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4,
+		"title": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/TitlePanel/TitleLbl,
+		"toppings": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/ToppingLbl,
+		"slice_1": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox/Slice1,
+		"slice_4": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox/Slice4,
+		"slice_8": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox/Slice8,
+		"take_order": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/TakeOrder,
+		"give_order": $Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/GiveOrder,
 	}
 ]
 
-@onready var slice_label: RichTextLabel = $Counter/MarginContainer/VBoxContainer/CounterCont/SlicePanel/MarginContainer/VBoxContainer/Slice
-@onready var slice_texture: TextureRect = $Counter/MarginContainer/VBoxContainer/CounterCont/SlicePanel/MarginContainer/VBoxContainer/TextureRect
+@onready var slice_texture: TextureRect = $Counter/MainMargin/MainVBox/CounterContainer/SlicePanel/SliceMargin/SliceVBox/BoardTexture/SliceTexture
+@onready var slice_4_label: RichTextLabel = $Counter/MainMargin/MainVBox/CounterContainer/SlicePanel/SliceMargin/SliceVBox/SliceHBox/Slice4
+@onready var slice_8_label: RichTextLabel = $Counter/MainMargin/MainVBox/CounterContainer/SlicePanel/SliceMargin/SliceVBox/SliceHBox/Slice8
 
-@onready var pack_up_label: RichTextLabel = $Counter/MarginContainer/VBoxContainer/CounterCont/BoxPanel/MarginContainer/VBoxContainer/PackUp
-@onready var box_texture: TextureRect = $Counter/MarginContainer/VBoxContainer/CounterCont/BoxPanel/MarginContainer/VBoxContainer/TextureRect
+@onready var box_background: TextureRect = $Counter/MainMargin/MainVBox/CounterContainer/BoxPanel/BoxTexture
+@onready var box_pizza_texture: TextureRect = $Counter/MainMargin/MainVBox/CounterContainer/BoxPanel/BoxMargin/BoxVBox/BoxTexture
+@onready var pack_up_label: RichTextLabel = $Counter/MainMargin/MainVBox/CounterContainer/BoxPanel/BoxMargin/BoxVBox/PackUp
 
-@onready var counter_trash_label: RichTextLabel = $Counter/MarginContainer/VBoxContainer/CounterCont/VBoxContainer/Trash
+@onready var money_label: Label = $Counter/MainMargin/MainVBox/CounterContainer/VBoxContainer/MoneyPanel/Money
+@onready var time_label: Label = $Counter/MainMargin/MainVBox/CounterContainer/VBoxContainer/TimePanel/Time
+@onready var counter_trash_label: RichTextLabel = $Counter/MainMargin/MainVBox/CounterContainer/VBoxContainer/Trash
 
 # KITCHEN NODE REFERENCES
-@onready var sauce_label: RichTextLabel = $Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer/Sauce
-@onready var cheese_label: RichTextLabel = $Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer/Cheese
-@onready var pepperoni_label: RichTextLabel = $Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer/Pepperoni
-@onready var make_dough_label: RichTextLabel = $Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/IngPanel/MarginContainer/VBoxContainer/MakeDough
+@onready var sauce_label: RichTextLabel = $Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/IngPanel/IngMargin/IngVBox/Sauce
+@onready var cheese_label: RichTextLabel = $Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/IngPanel/IngMargin/IngVBox/Cheese
+@onready var pepperoni_label: RichTextLabel = $Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/IngPanel/IngMargin/IngVBox/Pepperoni
+@onready var make_dough_label: RichTextLabel = $Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/IngPanel/IngMargin/IngVBox/MakeDough
 
-@onready var add_label: RichTextLabel = $Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer/Add
-@onready var kitchen_pizza_texture: TextureRect = $Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer/TextureRect
-@onready var into_oven_label: RichTextLabel = $Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer/IntoOven
-@onready var kitchen_trash_label: RichTextLabel = $Kitchen/MarginContainer/HBoxContainer/MainPanel/MarginContainer/HBoxContainer/PizzaPanel/MarginContainer/VBoxContainer/Trash
+@onready var add_label: RichTextLabel = $Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/PizzaPanel/PizzaMargin/PizzaVBox/Add
+@onready var kitchen_pizza_texture: TextureRect = $Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/PizzaPanel/PizzaMargin/PizzaVBox/BoardTexture/PizzaTexture
+@onready var into_oven_label: RichTextLabel = $Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/PizzaPanel/PizzaMargin/PizzaVBox/IntoOven
+@onready var kitchen_trash_label: RichTextLabel = $Kitchen/MainContainer/MainHBox/StationPanel/StationMargin/StationHBox/PizzaPanel/PizzaMargin/PizzaVBox/Trash
 
-@onready var take_out_label: RichTextLabel = $Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/TakeOut
+@onready var take_out_label: RichTextLabel = $Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/TakeOut
+
+@onready var oven_panels: Array[PanelContainer] = [
+	$Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel1,
+	$Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel2,
+	$Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel3,
+	$Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel4
+]
 
 @onready var oven_slot_labels: Array[RichTextLabel] = [
-	$Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel1/TextureRect.get_node("1") as RichTextLabel,
-	$Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel2/TextureRect.get_node("2") as RichTextLabel,
-	$Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel3/TextureRect.get_node("3") as RichTextLabel,
-	$Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel4/TextureRect.get_node("4") as RichTextLabel
+	$Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel1/CommandContainer.get_node("1") as RichTextLabel,
+	$Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel2/CommandContainer.get_node("2") as RichTextLabel,
+	$Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel3/CommandContainer.get_node("3") as RichTextLabel,
+	$Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel4/CommandContainer.get_node("4") as RichTextLabel
 ]
 
-@onready var oven_textures: Array[TextureRect] = [
-	$Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel1/TextureRect,
-	$Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel2/TextureRect,
-	$Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel3/TextureRect,
-	$Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel4/TextureRect
-]
-
-@onready var oven_progress_bars: Array[ProgressBar] = [
-	$Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel1/ProgressBar,
-	$Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel2/ProgressBar,
-	$Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel3/ProgressBar,
-	$Kitchen/MarginContainer/HBoxContainer/OvenPanel/MarginContainer/VBoxContainer/OvenPanel4/ProgressBar
+@onready var oven_sliders: Array[HSlider] = [
+	$Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel1/HSlider,
+	$Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel2/HSlider,
+	$Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel3/HSlider,
+	$Kitchen/MainContainer/MainHBox/OvenPanel/OvenMargin/OvenVBox/OvenPanel4/HSlider
 ]
 
 # Active command descriptor structures:
@@ -105,13 +139,66 @@ func _ready() -> void:
 	tex_cheese_unmelted = load("res://textures/cheese_unmelted.png")
 	tex_cheese_melted = load("res://textures/cheese_melted.png")
 	tex_pepperoni = load("res://textures/pepperoni.png")
+	tex_slice4 = load("res://textures/slice4.png")
+	tex_slice8 = load("res://textures/slice8.png")
+	tex_slice1_order = load("res://textures/slice1_order.png")
+	tex_slice4_order = load("res://textures/slice4_order.png")
+	tex_slice8_order = load("res://textures/slice8_order.png")
+	tex_box_open = load("res://textures/box_open.png")
+	tex_box_closed = load("res://textures/box_closed.png")
+	tex_timesup = load("res://textures/timesup.png")
 
-	# Configure progress bars (normalized 0.0 to 1.0 for stage-based filling)
-	for bar in oven_progress_bars:
-		bar.min_value = 0.0
-		bar.max_value = 1.0
-		bar.value = 0.0
-		get_or_create_stage_label(bar)
+	# Setup oven StyleBoxTextures for empty/off and baking/on
+	style_oven_off = StyleBoxTexture.new()
+	style_oven_off.texture = load("res://textures/oven_off.png")
+	style_oven_off.expand_margin_top = 80.0
+	style_oven_off.expand_margin_bottom = 80.0
+
+	style_oven_on = StyleBoxTexture.new()
+	style_oven_on.texture = load("res://textures/oven_on.png")
+	style_oven_on.expand_margin_top = 80.0
+	style_oven_on.expand_margin_bottom = 80.0
+
+	# Ensure order slice textures are set (fallback if not assigned in scene)
+	for slot in order_slot_nodes:
+		if slot["slice_1"].texture == null:
+			slot["slice_1"].texture = tex_slice1_order
+		if slot["slice_4"].texture == null:
+			slot["slice_4"].texture = tex_slice4_order
+		if slot["slice_8"].texture == null:
+			slot["slice_8"].texture = tex_slice8_order
+
+	# Ensure slice texture on cutting board fills the board nicely
+	slice_texture.set_anchors_preset(Control.PRESET_FULL_RECT)
+	slice_texture.offset_left = 0
+	slice_texture.offset_top = 0
+	slice_texture.offset_right = 0
+	slice_texture.offset_bottom = 0
+
+	# Configure TimeUpPanel graphic
+	time_up_panel.custom_minimum_size = Vector2(500, 250)
+	var timesup_rect = time_up_panel.get_node_or_null("TimesUpTexture") as TextureRect
+	if timesup_rect == null:
+		timesup_rect = TextureRect.new()
+		timesup_rect.name = "TimesUpTexture"
+		timesup_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+		timesup_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		timesup_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		timesup_rect.texture = tex_timesup
+		timesup_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		time_up_panel.add_child(timesup_rect)
+	var timesup_lbl = time_up_panel.get_node_or_null("TimesUp") as Label
+	if timesup_lbl != null:
+		timesup_lbl.hide()
+
+	# Configure oven sliders
+	for slider in oven_sliders:
+		slider.min_value = 0.0
+		slider.max_value = Pizza.TIME_BURNT
+		slider.value = 0.0
+
+	# Hide TimeUpPanel at start
+	time_up_panel.hide()
 
 	# Connect pizzeria signals
 	pizzeria.kitchen_table_changed.connect(_on_state_updated)
@@ -120,15 +207,28 @@ func _ready() -> void:
 	pizzeria.packing_station_changed.connect(_on_state_updated)
 	pizzeria.order_slot_changed.connect(_on_order_updated)
 	pizzeria.order_reviewed.connect(_on_order_reviewed)
+	pizzeria.order_expired.connect(_on_order_expired)
 
-	# Spawn initial customer orders with generous waiting times
-	pizzeria.spawn_order(1, ["SAUCE", "CHEESE", "PEPPERONI"], 90.0, 150.0)
-	pizzeria.spawn_order(2, ["CHEESE"], 80.0, 130.0)
+	# Spawn initial customer orders with generous waiting times and slice requirements
+	pizzeria.spawn_order(1, ["SAUCE", "CHEESE", "PEPPERONI"], 90.0, 150.0, 4)
+	pizzeria.spawn_order(2, ["CHEESE"], 80.0, 130.0, 8)
 
+	update_time_display()
+	update_money_display()
 	refresh_ui()
 
 
 func _process(delta: float) -> void:
+	if is_game_over:
+		return
+
+	# Countdown overall game timer
+	game_time = maxf(0.0, game_time - delta)
+	update_time_display()
+	if game_time <= 0.0:
+		trigger_game_over()
+		return
+
 	# Update simulation (baking timers, customer patience)
 	pizzeria.update(delta)
 
@@ -152,6 +252,9 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if is_game_over:
+		return
+
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_SHIFT or event.keycode == KEY_CAPSLOCK:
 			return
@@ -207,6 +310,25 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			refresh_ui()
 
 
+func trigger_game_over() -> void:
+	is_game_over = true
+	time_up_panel.show()
+
+
+func update_time_display() -> void:
+	var total_sec = int(ceil(game_time))
+	var minutes = total_sec / 60
+	var seconds = total_sec % 60
+	time_label.text = "%02d:%02d" % [minutes, seconds]
+
+
+func update_money_display() -> void:
+	if money >= 0:
+		money_label.text = "$%d" % money
+	else:
+		money_label.text = "-$%d" % abs(money)
+
+
 # Rebuilds active typing targets and syncs station visuals.
 func refresh_ui() -> void:
 	build_counter_targets()
@@ -248,18 +370,25 @@ func build_counter_targets() -> void:
 					"action": cmd
 				})
 
-	# 2. Slice station: "slice"
+	# 2. Slice station: "slice 4" and "slice 8" (pizza can be sliced once)
 	if not pizzeria.slice_queue.is_empty() and not pizzeria.slice_queue[0].is_sliced:
 		active_counter_targets.append({
-			"command": "slice",
-			"completion": old_completions.get("slice", 0),
-			"label": slice_label,
+			"command": "slice 4",
+			"completion": old_completions.get("slice 4", 0),
+			"label": slice_4_label,
 			"prefix": "",
-			"action": "slice"
+			"action": "slice 4"
+		})
+		active_counter_targets.append({
+			"command": "slice 8",
+			"completion": old_completions.get("slice 8", 0),
+			"label": slice_8_label,
+			"prefix": "",
+			"action": "slice 8"
 		})
 
-	# 3. Packing box station: "pack up"
-	if not pizzeria.slice_queue.is_empty() and pizzeria.slice_queue[0].is_sliced and pizzeria.packing_station_pizza == null:
+	# 3. Packing box station: "pack up" (works for sliced or unsliced pizzas if box is free)
+	if not pizzeria.slice_queue.is_empty() and pizzeria.packing_station_pizza == null:
 		active_counter_targets.append({
 			"command": "pack up",
 			"completion": old_completions.get("pack up", 0),
@@ -440,8 +569,7 @@ func render_all_targets(targets: Array[Dictionary], is_kitchen: bool) -> void:
 				label.text = "[color=green]" + typed + "[/color]" + untyped
 
 
-# VISUAL SYNCHRONIZATION & PIZZA RENDERING]
-# Renders a pizza with its layered ingredients and bake stage textures.
+# VISUAL SYNCHRONIZATION & PIZZA RENDERING
 func update_pizza_display(base_rect: TextureRect, pizza: Pizza) -> void:
 	if base_rect == null:
 		return
@@ -475,6 +603,14 @@ func update_pizza_display(base_rect: TextureRect, pizza: Pizza) -> void:
 	var pep_node = get_or_create_layer(base_rect, "PepLayer", tex_pepperoni)
 	pep_node.visible = pizza.has_topping("PEPPERONI")
 
+	# Slice cut layer (slice4.png or slice8.png)
+	var slice_tex: Texture2D = null
+	if pizza.is_sliced:
+		slice_tex = tex_slice8 if pizza.slice_count == 8 else tex_slice4
+	var slice_node = get_or_create_layer(base_rect, "SliceLayer", slice_tex)
+	slice_node.texture = slice_tex
+	slice_node.visible = pizza.is_sliced
+
 	# If burnt, tint darker
 	if doneness == Pizza.Doneness.BURNT:
 		base_rect.self_modulate = Color(0.35, 0.25, 0.25)
@@ -496,23 +632,20 @@ func get_or_create_layer(parent: TextureRect, layer_name: String, tex: Texture2D
 	return layer
 
 
-func get_or_create_stage_label(bar: ProgressBar) -> Label:
-	var lbl = bar.get_node_or_null("StageLabel") as Label
-	if lbl == null:
-		lbl = Label.new()
-		lbl.name = "StageLabel"
-		lbl.set_anchors_preset(Control.PRESET_FULL_RECT)
-		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		lbl.add_theme_font_size_override("font_size", 13)
-		bar.add_child(lbl)
-	return lbl
-
-
 func update_order_cards() -> void:
 	for i in range(4):
 		var order = pizzeria.order_slots[i]
 		var nodes = order_slot_nodes[i]
+
+		# Update slice indicator TextureRects (Slice1, Slice4, Slice8)
+		# All low alpha (0.2) until the order is taken; alpha 1.0 for requested slice once ACTIVE
+		var req_slices: int = 0
+		if order != null and order.status == Order.Status.ACTIVE:
+			req_slices = order.requested_slices
+
+		nodes["slice_1"].modulate.a = 1.0 if req_slices == 1 else 0.2
+		nodes["slice_4"].modulate.a = 1.0 if req_slices == 4 else 0.2
+		nodes["slice_8"].modulate.a = 1.0 if req_slices == 8 else 0.2
 
 		# ToppingLbl is a plain Label, so NO BBCode tags are used here!
 		if order == null or order.status == Order.Status.EMPTY:
@@ -548,34 +681,53 @@ func update_order_cards() -> void:
 func update_counter_station_visuals() -> void:
 	# Slice station
 	if pizzeria.slice_queue.is_empty():
-		slice_label.text = "slice"
-		slice_label.modulate = Color(1, 1, 1, 0.3)
+		slice_4_label.text = "slice 4"
+		slice_8_label.text = "slice 8"
+		slice_4_label.modulate = Color(1, 1, 1, 0.3)
+		slice_8_label.modulate = Color(1, 1, 1, 0.3)
 		update_pizza_display(slice_texture, null)
 	elif not pizzeria.slice_queue[0].is_sliced:
-		slice_label.text = "slice"
-		slice_label.modulate = Color(1, 1, 1, 1.0)
+		slice_4_label.modulate = Color(1, 1, 1, 1.0)
+		slice_8_label.modulate = Color(1, 1, 1, 1.0)
 		update_pizza_display(slice_texture, pizzeria.slice_queue[0])
 	else:
-		slice_label.text = "sliced!"
-		slice_label.modulate = Color(0.4, 1.0, 0.4, 0.8)
+		var count = pizzeria.slice_queue[0].slice_count
+		if count == 4:
+			slice_4_label.text = "sliced (4)"
+			slice_8_label.text = "slice 8"
+			slice_4_label.modulate = Color(0.4, 1.0, 0.4, 0.8)
+			slice_8_label.modulate = Color(1, 1, 1, 0.2)
+		elif count == 8:
+			slice_4_label.text = "slice 4"
+			slice_8_label.text = "sliced (8)"
+			slice_4_label.modulate = Color(1, 1, 1, 0.2)
+			slice_8_label.modulate = Color(0.4, 1.0, 0.4, 0.8)
+		else:
+			slice_4_label.text = "slice 4"
+			slice_8_label.text = "slice 8"
+			slice_4_label.modulate = Color(1, 1, 1, 0.3)
+			slice_8_label.modulate = Color(1, 1, 1, 0.3)
 		update_pizza_display(slice_texture, pizzeria.slice_queue[0])
 
 	# Box station
 	if pizzeria.packing_station_pizza != null:
+		box_background.texture = tex_box_closed
 		pack_up_label.text = "boxed"
 		pack_up_label.modulate = Color(1.0, 0.85, 0.3, 1.0)
 		counter_trash_label.modulate = Color(1, 1, 1, 1.0)
-		update_pizza_display(box_texture, pizzeria.packing_station_pizza)
-	elif not pizzeria.slice_queue.is_empty() and pizzeria.slice_queue[0].is_sliced:
+		update_pizza_display(box_pizza_texture, null)
+	elif not pizzeria.slice_queue.is_empty():
+		box_background.texture = tex_box_open
 		pack_up_label.text = "pack up"
 		pack_up_label.modulate = Color(1, 1, 1, 1.0)
 		counter_trash_label.modulate = Color(1, 1, 1, 0.3)
-		update_pizza_display(box_texture, null)
+		update_pizza_display(box_pizza_texture, null)
 	else:
+		box_background.texture = tex_box_open
 		pack_up_label.text = "pack up"
 		pack_up_label.modulate = Color(1, 1, 1, 0.3)
 		counter_trash_label.modulate = Color(1, 1, 1, 0.3)
-		update_pizza_display(box_texture, null)
+		update_pizza_display(box_pizza_texture, null)
 
 
 func update_kitchen_station_visuals() -> void:
@@ -593,61 +745,21 @@ func update_kitchen_station_visuals() -> void:
 	into_oven_label.modulate = Color(1, 1, 1, 1.0) if can_bake else Color(1, 1, 1, 0.3)
 
 
-## Updates oven progress bars: fill represents time until next stage,
-## and the label explicitly counts down the time to that stage.
+## Updates oven sliders & visual styles (oven_on / oven_off)
 func update_oven_progress() -> void:
 	for i in range(4):
 		var p = pizzeria.ovens[i]
-		var bar = oven_progress_bars[i]
-		var tex_rect = oven_textures[i]
-		var stage_lbl = get_or_create_stage_label(bar)
-
-		update_pizza_display(tex_rect, p)
+		var panel = oven_panels[i]
+		var slider = oven_sliders[i]
 
 		if p != null:
-			var t = p.cook_time
-			var doneness = p.get_doneness()
-
-			match doneness:
-				Pizza.Doneness.RAW:
-					# Progress filling towards UNDERCOOKED (8.0s)
-					bar.value = clampf(t / Pizza.TIME_UNDERCOOKED, 0.0, 1.0)
-					bar.modulate = Color(0.7, 0.7, 0.8) # Pale dough
-					var remaining = maxf(0.0, Pizza.TIME_UNDERCOOKED - t)
-					stage_lbl.text = "RAW (%.1fs to bake)" % remaining
-
-				Pizza.Doneness.UNDERCOOKED:
-					# Progress filling towards PERFECT (16.0s)
-					var stage_duration = Pizza.TIME_PERFECT_MIN - Pizza.TIME_UNDERCOOKED
-					bar.value = clampf((t - Pizza.TIME_UNDERCOOKED) / stage_duration, 0.0, 1.0)
-					bar.modulate = Color(1.0, 0.75, 0.2) # Warm amber
-					var remaining = maxf(0.0, Pizza.TIME_PERFECT_MIN - t)
-					stage_lbl.text = "BAKING (%.1fs to PERFECT)" % remaining
-
-				Pizza.Doneness.PERFECT:
-					# Progress filling across PERFECT window towards OVERCOOKED (28.0s)
-					var stage_duration = Pizza.TIME_PERFECT_MAX - Pizza.TIME_PERFECT_MIN
-					bar.value = clampf((t - Pizza.TIME_PERFECT_MIN) / stage_duration, 0.0, 1.0)
-					bar.modulate = Color(0.2, 0.95, 0.3) # Bright Green
-					var remaining = maxf(0.0, Pizza.TIME_PERFECT_MAX - t)
-					stage_lbl.text = "★ PERFECT! (%.1fs left) ★" % remaining
-
-				Pizza.Doneness.OVERCOOKED:
-					# Progress filling towards BURNT (40.0s)
-					var stage_duration = Pizza.TIME_BURNT - Pizza.TIME_PERFECT_MAX
-					bar.value = clampf((t - Pizza.TIME_PERFECT_MAX) / stage_duration, 0.0, 1.0)
-					bar.modulate = Color(0.95, 0.4, 0.1) # Urgent red-orange
-					var remaining = maxf(0.0, Pizza.TIME_BURNT - t)
-					stage_lbl.text = "BURNING IN: %.1fs!" % remaining
-
-				Pizza.Doneness.BURNT:
-					bar.value = 1.0
-					bar.modulate = Color(0.4, 0.1, 0.1) # Dark burnt
-					stage_lbl.text = "BURNT!"
+			panel.add_theme_stylebox_override("panel", style_oven_on)
+			slider.modulate = Color(1, 1, 1, 1.0)
+			slider.value = clampf(p.cook_time, 0.0, Pizza.TIME_BURNT)
 		else:
-			bar.value = 0.0
-			bar.modulate = Color(1, 1, 1, 0.2)
-			stage_lbl.text = "EMPTY"
+			panel.add_theme_stylebox_override("panel", style_oven_off)
+			slider.value = 0.0
+			slider.modulate = Color(1, 1, 1, 0.25)
 
 
 ## Spawns a random customer order in an available slot
@@ -669,7 +781,9 @@ func spawn_random_order() -> void:
 	for i in range(count):
 		chosen.append(possible[i])
 
-	pizzeria.spawn_order(slot_to_fill, chosen, randf_range(80.0, 110.0), randf_range(130.0, 170.0))
+	var slice_options = [1, 4, 8]
+	var chosen_slices = slice_options.pick_random()
+	pizzeria.spawn_order(slot_to_fill, chosen, randf_range(80.0, 110.0), randf_range(130.0, 170.0), chosen_slices)
 	refresh_ui()
 
 
@@ -687,5 +801,24 @@ func _on_order_updated(_slot: int, _o: Order) -> void:
 
 
 func _on_order_reviewed(slot: int, review: Dictionary) -> void:
-	print("Order review on slot %d: %s" % [slot, review])
+	var score = review.get("score", 0)
+	money += score
+	update_money_display()
+	print("Order review on slot %d: %s | Money earned: %d" % [slot, review, score])
+	refresh_ui()
+
+
+func _on_order_expired(_slot: int, was_active: bool) -> void:
+	if was_active:
+		# Customer had given their order: -$50 penalty
+		money -= 50
+		update_money_display()
+		print("Order expired (was active): -$50 penalty! Current money: %d" % money)
+	else:
+		# Customer was waiting to take order: -10s penalty
+		game_time = maxf(0.0, game_time - 10.0)
+		update_time_display()
+		print("Order expired (waiting to take): -10s penalty! Remaining time: %.1fs" % game_time)
+		if game_time <= 0.0:
+			trigger_game_over()
 	refresh_ui()
