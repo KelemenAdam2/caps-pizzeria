@@ -240,13 +240,30 @@ func give_order_by_number(target_num: int) -> Dictionary:
 	return review
 
 
+## Resets the restaurant state completely for starting a level.
+func reset() -> void:
+	kitchen_table_pizza = null
+	for i in range(4):
+		ovens[i] = null
+		order_slots[i] = null
+	slice_queue.clear()
+	packing_station_pizza = null
+	next_order_number = 101
+	kitchen_table_changed.emit(null)
+	slice_queue_changed.emit(slice_queue)
+	packing_station_changed.emit(null)
+	for i in range(4):
+		oven_changed.emit(i + 1, null)
+		order_slot_changed.emit(i + 1, null)
+
+
 ## Spawns a customer order at the given slot (1 to 4).
-func spawn_order(slot_number: int, toppings: Array, p_order_patience: float = 80.0, p_food_patience: float = 130.0, p_slices: int = 4) -> Order:
+func spawn_order(slot_number: int, toppings: Array, p_order_patience: float = 80.0, p_food_patience: float = 130.0, p_slices: int = 4, p_max_price: int = 100) -> Order:
 	if slot_number < 1 or slot_number > 4:
 		return null
 	var num = next_order_number
 	next_order_number += 1
-	var new_order = Order.new(slot_number, num, toppings, p_order_patience, p_food_patience, p_slices)
+	var new_order = Order.new(slot_number, num, toppings, p_order_patience, p_food_patience, p_slices, p_max_price)
 	order_slots[slot_number - 1] = new_order
 	order_slot_changed.emit(slot_number, new_order)
 	return new_order

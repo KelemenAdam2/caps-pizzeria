@@ -30,6 +30,9 @@ var requested_toppings: Array[String] = []
 ## Slicing requirement: 1 = no slice (whole), 4 = 4 slices, 8 = 8 slices
 var requested_slices: int = 4
 
+## Maximum reward / price for completing this order (e.g. 100, 150)
+var max_price: int = 100
+
 ## Current status of this order slot
 var status: Status = Status.EMPTY
 
@@ -43,13 +46,14 @@ var max_patience: float = 80.0
 var last_review: Dictionary = {}
 
 
-func _init(p_slot_number: int = 1, p_order_number: int = 101, p_toppings: Array = [], p_order_patience: float = 80.0, p_food_patience: float = 130.0, p_slices: int = 4) -> void:
+func _init(p_slot_number: int = 1, p_order_number: int = 101, p_toppings: Array = [], p_order_patience: float = 80.0, p_food_patience: float = 130.0, p_slices: int = 4, p_max_price: int = 100) -> void:
 	slot_number = p_slot_number
 	order_number = p_order_number
 	requested_toppings.clear()
 	for t in p_toppings:
 		requested_toppings.append(str(t).strip_edges().to_upper())
 	requested_slices = p_slices
+	max_price = p_max_price
 	patience_waiting_to_order = p_order_patience
 	patience_waiting_for_food = p_food_patience
 	max_patience = p_order_patience
@@ -193,6 +197,7 @@ func review_pizza(pizza: Pizza) -> Dictionary:
 		"extra_toppings": extra_toppings,
 		"is_sliced": pizza.is_sliced,
 		"is_boxed": pizza.is_boxed,
+		"price": max_price,
 		"feedback": feedback
 	}
 
