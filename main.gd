@@ -247,6 +247,12 @@ var tex_blue_bg: Texture2D = null
 var style_oven_on: StyleBoxTexture = null
 var style_oven_off: StyleBoxTexture = null
 
+const RICH_TEXT_BG_NORMAL := Color("#b1000081")
+const RICH_TEXT_BORDER_NORMAL := Color("#b10000")
+const RICH_TEXT_BG_SHIFT := Color("#007ed5a2")
+const RICH_TEXT_BORDER_SHIFT := Color("#006aa2")
+var _last_shift_theme_state: int = -1
+
 # AUDIO ASSETS & PLAYERS
 var sfx_box: AudioStream = null
 var sfx_cash_up: AudioStream = null
@@ -529,10 +535,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	# Update background texture based on shift across all screens
+	# Update background texture and RichTextLabel theme based on shift across all screens
 	var is_shift = Input.is_action_pressed("hold_shift")
-	if global_background != null:
-		global_background.texture = tex_blue_bg if is_shift else tex_red_bg
+	update_shift_visuals(is_shift)
 
 	if current_screen == GameScreen.TIMES_UP:
 		times_up_timer -= delta
@@ -585,8 +590,23 @@ func show_screen(screen: GameScreen) -> void:
 	review_panel.visible = (screen == GameScreen.REVIEW)
 	end_screen.visible = (screen == GameScreen.END_SCREEN)
 
+	update_shift_visuals(is_shift)
+
+
+func update_shift_visuals(is_shift: bool) -> void:
 	if global_background != null:
 		global_background.texture = tex_blue_bg if is_shift else tex_red_bg
+
+	var shift_int := 1 if is_shift else 0
+	if shift_int == _last_shift_theme_state:
+		return
+	_last_shift_theme_state = shift_int
+
+	if theme != null:
+		var style := theme.get_stylebox("normal", "RichTextLabel") as StyleBoxFlat
+		if style != null:
+			style.bg_color = RICH_TEXT_BG_SHIFT if is_shift else RICH_TEXT_BG_NORMAL
+			style.border_color = RICH_TEXT_BORDER_SHIFT if is_shift else RICH_TEXT_BORDER_NORMAL
 
 
 func go_to_menu() -> void:
@@ -1203,7 +1223,7 @@ func render_all_targets(targets: Array[Dictionary], is_kitchen: bool) -> void:
 				max_takeout_comp = maxi(max_takeout_comp, mini(comp, 9))
 
 		# Render ADD prefix label above prep table
-		var add_pref = "ADD "
+		var add_pref = "ADD"
 		var typed_add = add_pref.substr(0, max_add_comp)
 		var untyped_add = add_pref.substr(max_add_comp)
 		add_label.text = "[color=green]" + typed_add + "[/color]" + untyped_add
@@ -1222,7 +1242,7 @@ func render_all_targets(targets: Array[Dictionary], is_kitchen: bool) -> void:
 
 		# Render TAKE OUT prefix label above ovens
 		var any_baking = pizzeria.ovens.any(func(p): return p != null)
-		var to_pref = "TAKE OUT "
+		var to_pref = "TAKE OUT"
 		var typed_to = to_pref.substr(0, max_takeout_comp)
 		var untyped_to = to_pref.substr(max_takeout_comp)
 		take_out_label.text = "[color=green]" + typed_to + "[/color]" + untyped_to

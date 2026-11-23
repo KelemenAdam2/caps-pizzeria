@@ -1,5 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://d0l0s56hclvhv"]
 
+[ext_resource type="FontFile" uid="uid://ch0vojeybmn58" path="res://PressStart2P-Regular.ttf" id="1_ofusn"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wunbd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgyoi"]
@@ -30,10 +32,15 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ig7tw"]
 content_margin_left = 10.0
-content_margin_top = 5.0
+content_margin_top = 10.0
 content_margin_right = 10.0
-content_margin_bottom = 5.0
-bg_color = Color(0.37036458, 0.37036446, 0.37036443, 1)
+content_margin_bottom = 8.0
+bg_color = Color(0.6958268, 5.896017e-07, 3.85046e-07, 0.5058824)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.69245994, 1.8410012e-06, 7.70092e-07, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -48,6 +55,7 @@ Label/font_sizes/font_size = 25
 Label/styles/normal = SubResource("StyleBoxEmpty_kgyoi")
 Panel/styles/panel = SubResource("StyleBoxFlat_wunbd")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_ofusn")
-RichTextLabel/font_sizes/normal_font_size = 25
+RichTextLabel/font_sizes/normal_font_size = 18
+RichTextLabel/fonts/normal_font = ExtResource("1_ofusn")
 RichTextLabel/styles/normal = SubResource("StyleBoxFlat_ig7tw")
 VSeparator/styles/separator = SubResource("StyleBoxEmpty_8y8jq")

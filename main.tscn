@@ -26,8 +26,8 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wunbd"]
 texture = ExtResource("8_ycdy4")
-expand_margin_top = 80.0
-expand_margin_bottom = 80.0
+expand_margin_top = 83.0
+expand_margin_bottom = 83.0
 
 [sub_resource type="DPITexture" id="DPITexture_w48qg"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\"/></svg>
@@ -97,17 +97,6 @@ border_width_bottom = 5
 border_color = Color(0.35686275, 0.35686275, 0.35686275, 0.3764706)
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yaehf"]
-content_margin_left = 20.0
-content_margin_top = 5.0
-content_margin_right = 20.0
-content_margin_bottom = 5.0
-bg_color = Color(0.37036458, 0.37036446, 0.37036443, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_074og"]
 bg_color = Color(0.22352941, 0.22352941, 0.22352941, 0.9019608)
 border_width_left = 5
@@ -116,10 +105,10 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 border_blend = true
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [node name="Main" type="Control" unique_id=1155888874]
 layout_mode = 3
@@ -207,13 +196,22 @@ layout_mode = 2
 [node name="TitlePanel" type="Panel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox" unique_id=1535987207]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.2
 
 [node name="TitleLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/TitlePanel" unique_id=120131649]
-layout_mode = 0
-offset_top = 4.0
-offset_right = 274.0
-offset_bottom = 39.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -137.0
+offset_top = -27.5
+offset_right = 137.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.2
 text = "Order #101"
 horizontal_alignment = 1
 
@@ -232,7 +230,7 @@ grow_vertical = 2
 [node name="ToppingLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox" unique_id=1647453882]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "Toppings:
  + Sauce
  + Cheese
@@ -244,7 +242,7 @@ layout_mode = 2
 [node name="VSeparator3" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1777751791]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="Slice1" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=2043532966]
 layout_mode = 2
@@ -256,7 +254,7 @@ stretch_mode = 5
 [node name="VSeparator2" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=549645002]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="Slice4" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=192327227]
 layout_mode = 2
@@ -268,7 +266,7 @@ stretch_mode = 5
 [node name="VSeparator" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1135344437]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="Slice8" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=168681137]
 layout_mode = 2
@@ -280,7 +278,7 @@ stretch_mode = 5
 [node name="VSeparator4" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=9021342]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="TakeOrder" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot1/OrderMargin/OrderVBox" unique_id=204148903]
 layout_mode = 2
@@ -321,13 +319,21 @@ layout_mode = 2
 [node name="TitlePanel" type="Panel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox" unique_id=411922974]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.2
 
 [node name="TitleLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/TitlePanel" unique_id=652954769]
-layout_mode = 0
-offset_top = 4.0
-offset_right = 274.0
-offset_bottom = 39.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -137.0
+offset_top = -27.5
+offset_right = 137.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Order #101"
 horizontal_alignment = 1
 
@@ -346,7 +352,7 @@ grow_vertical = 2
 [node name="ToppingLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox" unique_id=487895030]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "Toppings:
  + Sauce
  + Cheese
@@ -358,7 +364,7 @@ layout_mode = 2
 [node name="VSeparator3" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=340012323]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="Slice1" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=765844913]
 layout_mode = 2
@@ -370,7 +376,7 @@ stretch_mode = 5
 [node name="VSeparator2" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1981340443]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="Slice4" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=235699643]
 layout_mode = 2
@@ -382,7 +388,7 @@ stretch_mode = 5
 [node name="VSeparator" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=471505]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="Slice8" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1650425813]
 layout_mode = 2
@@ -394,7 +400,7 @@ stretch_mode = 5
 [node name="VSeparator4" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1664869349]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="TakeOrder" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot2/OrderMargin/OrderVBox" unique_id=999465153]
 layout_mode = 2
@@ -435,13 +441,21 @@ layout_mode = 2
 [node name="TitlePanel" type="Panel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox" unique_id=1791775310]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.2
 
 [node name="TitleLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/TitlePanel" unique_id=376676371]
-layout_mode = 0
-offset_top = 4.0
-offset_right = 274.0
-offset_bottom = 39.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -137.0
+offset_top = -27.5
+offset_right = 137.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Order #101"
 horizontal_alignment = 1
 
@@ -460,7 +474,7 @@ grow_vertical = 2
 [node name="ToppingLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox" unique_id=1306130834]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "Toppings:
  + Sauce
  + Cheese
@@ -472,7 +486,7 @@ layout_mode = 2
 [node name="VSeparator3" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1885699511]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="Slice1" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=576823494]
 layout_mode = 2
@@ -484,7 +498,7 @@ stretch_mode = 5
 [node name="VSeparator2" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1007614416]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="Slice4" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=605962893]
 layout_mode = 2
@@ -496,7 +510,7 @@ stretch_mode = 5
 [node name="VSeparator" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=215065885]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="Slice8" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=482111683]
 layout_mode = 2
@@ -508,7 +522,7 @@ stretch_mode = 5
 [node name="VSeparator4" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1014290808]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="TakeOrder" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot3/OrderMargin/OrderVBox" unique_id=1652919717]
 layout_mode = 2
@@ -549,13 +563,21 @@ layout_mode = 2
 [node name="TitlePanel" type="Panel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox" unique_id=160913450]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.3
+size_flags_stretch_ratio = 0.2
 
 [node name="TitleLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/TitlePanel" unique_id=1350013934]
-layout_mode = 0
-offset_top = 4.0
-offset_right = 274.0
-offset_bottom = 39.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -137.0
+offset_top = -27.5
+offset_right = 137.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Order #101"
 horizontal_alignment = 1
 
@@ -574,7 +596,7 @@ grow_vertical = 2
 [node name="ToppingLbl" type="Label" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox" unique_id=1016370404]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "Toppings:
  + Sauce
  + Cheese
@@ -586,7 +608,7 @@ layout_mode = 2
 [node name="VSeparator3" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=894407414]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="Slice1" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=819719656]
 layout_mode = 2
@@ -598,7 +620,7 @@ stretch_mode = 5
 [node name="VSeparator2" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1974638891]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="Slice4" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=811295021]
 layout_mode = 2
@@ -610,7 +632,7 @@ stretch_mode = 5
 [node name="VSeparator" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=164965468]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="Slice8" type="TextureRect" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1645514803]
 layout_mode = 2
@@ -622,7 +644,7 @@ stretch_mode = 5
 [node name="VSeparator4" type="VSeparator" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox/ToppingPanel/ToppingVBox/SliceIndHBox" unique_id=1771062812]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 
 [node name="TakeOrder" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/OrderPanel/OrderMargin/OrderHbox/OrderSlot4/OrderMargin/OrderVBox" unique_id=1260388304]
 layout_mode = 2
@@ -864,6 +886,20 @@ size_flags_stretch_ratio = 0.29
 [node name="BoxTexture" type="TextureRect" parent="Counter/MainMargin/MainVBox/CounterContainer/BoxPanel/BoxMargin/BoxVBox" unique_id=165628256]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Counter/MainMargin/MainVBox/CounterContainer/BoxPanel/BoxMargin/BoxVBox/BoxTexture" unique_id=1016444081]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.5
+offset_top = -27.5
+offset_right = 10.5
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PackUp" type="RichTextLabel" parent="Counter/MainMargin/MainVBox/CounterContainer/BoxPanel/BoxMargin/BoxVBox" unique_id=1217196008]
 layout_mode = 2
@@ -1731,7 +1767,6 @@ size_flags_stretch_ratio = 0.7
 layout_mode = 2
 theme = ExtResource("1_0xm2m")
 theme_override_font_sizes/normal_font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_yaehf")
 bbcode_enabled = true
 text = "start"
 fit_content = true
@@ -1748,7 +1783,6 @@ size_flags_stretch_ratio = 0.2
 layout_mode = 2
 theme = ExtResource("1_0xm2m")
 theme_override_font_sizes/normal_font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_yaehf")
 bbcode_enabled = true
 text = "quit"
 fit_content = true
@@ -1781,7 +1815,6 @@ offset_bottom = 136.0
 grow_horizontal = 2
 theme = ExtResource("1_0xm2m")
 theme_override_font_sizes/normal_font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_yaehf")
 bbcode_enabled = true
 text = "level"
 fit_content = true
@@ -1822,7 +1855,6 @@ layout_mode = 2
 layout_mode = 2
 theme = ExtResource("1_0xm2m")
 theme_override_font_sizes/normal_font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_yaehf")
 bbcode_enabled = true
 text = "1"
 fit_content = true
@@ -1863,7 +1895,6 @@ layout_mode = 2
 layout_mode = 2
 theme = ExtResource("1_0xm2m")
 theme_override_font_sizes/normal_font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_yaehf")
 bbcode_enabled = true
 text = "2"
 fit_content = true
@@ -1904,7 +1935,6 @@ layout_mode = 2
 layout_mode = 2
 theme = ExtResource("1_0xm2m")
 theme_override_font_sizes/normal_font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_yaehf")
 bbcode_enabled = true
 text = "3"
 fit_content = true
@@ -1945,7 +1975,6 @@ layout_mode = 2
 layout_mode = 2
 theme = ExtResource("1_0xm2m")
 theme_override_font_sizes/normal_font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_yaehf")
 bbcode_enabled = true
 text = "4"
 fit_content = true
@@ -1986,7 +2015,6 @@ layout_mode = 2
 layout_mode = 2
 theme = ExtResource("1_0xm2m")
 theme_override_font_sizes/normal_font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_yaehf")
 bbcode_enabled = true
 text = "5"
 fit_content = true
@@ -2027,7 +2055,6 @@ layout_mode = 2
 layout_mode = 2
 theme = ExtResource("1_0xm2m")
 theme_override_font_sizes/normal_font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_yaehf")
 bbcode_enabled = true
 text = "6"
 fit_content = true
@@ -2089,7 +2116,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_0xm2m")
 theme_override_font_sizes/normal_font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxFlat_yaehf")
 bbcode_enabled = true
 text = "return to menu"
 fit_content = true
